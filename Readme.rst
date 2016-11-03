@@ -18,9 +18,9 @@ Authors
 
 + Matthew Wolff (`GitHub <https://github.com/matthewjwolff>`_)
 + Kristen Barrett (`GitHub <https://github.com/kris-bee>`_)
-+ Josh Do
-+ Patrick Mancuso
-+ Ben Graham
++ Josh Do (`GitHub <https://github.com/JDoYo>`_)
++ Patrick Mancuso (`GitHub <https://github.com/ItalianStallion>`_)
++ Ben Graham (`GitHub <https://github.com/graham768>`_)
 
 License
 -------
