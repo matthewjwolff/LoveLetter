@@ -21,3 +21,10 @@ Authors
 + Josh Do
 + Patrick Mancuso
 + Ben Graham
+
+License
+-------
+
+This project is licensed under the GPL v3 (or later).
+The project can be copied and relicensed by any individual author (listed above)
+if there is interest and necessity.
