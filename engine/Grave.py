@@ -21,7 +21,9 @@ class Grave(object):
     def getState(self):
         '''
         Get played cards in the order they were played and who played them
-        Make sure to return a copy, do not give back references to the source of truth
+        Make sure to return a copy, do not give back references to the source 
+        of truth
+        
         Or do, and let the engine handle copying?
         '''
         pass

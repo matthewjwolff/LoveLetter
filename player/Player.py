@@ -10,11 +10,16 @@ class Player(object):
     '''
     This is the base class for all Player classes.
     
-    In a language with a more thorough class inheritance system, this class would be an abstract class or an interface.
+    In a language with a more thorough class inheritance system, this class 
+    would be an abstract class or an interface.
     
-    In python, there's no distinction between such things, so this class should be used as a model.
+    In python, there's no distinction between such things, so this class 
+    should be used as a model.
     
-    Types of players may include local players using a GUI, computer player using an AI, networked "player" proxy that receives moves from a nonlocal player, and networked "player" client that sends his moves to the proxy that is acting on his behalf
+    Types of players may include local players using a GUI, computer player 
+    using an AI, networked "player" proxy that receives moves from a nonlocal 
+    player, and networked "player" client that sends his moves to the proxy 
+    that is acting on his behalf.
     '''
 
 
