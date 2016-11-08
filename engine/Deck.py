@@ -6,7 +6,7 @@ The set of remaining cards. Possibly include a reference to the one removed card
 @author: mjw
 '''
 
-class MyClass(object):
+class Deck(object):
     '''
     classdocs
     '''
@@ -16,4 +16,18 @@ class MyClass(object):
         '''
         Constructor
         '''
-        
+        pass
+    
+    def getCard(self):
+        '''
+        Deal a card
+        '''
+        pass
+    
+    def getState(self):
+        '''
+        Get a structure holding the number of remaining cards and their possible types.
+        Make sure to return a copy, do not give back references to the source of truth
+        Or do, and let the engine handle copying?
+        '''
+        pass
