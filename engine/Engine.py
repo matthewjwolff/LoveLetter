@@ -30,7 +30,6 @@ class Engine(object):
     exercise good coding practice.
     '''
 
-
     def __init__(self, params):
         '''
         Constructor
@@ -39,26 +38,36 @@ class Engine(object):
         self.deck = Deck()
         self.running = False
         self.grave = Grave()
+        self.discarded = None
     
     def addPlayer(self, player):
         self.players.append(player)
     
     def runGame(self):
         assert len(self.players >= 2)
-        # TODO: initialize game
+        for player in self.players:
+            player.assignHand(self.deck.getCard())
+        # discard one
+        self.discarded = self.deck.getCard()
         while self.running == True :
             for player in self.players :
                 card = self.deck.getCard()
-                deckState = self.deck.getState()
-                graveState = self.grave.getState()
-                # Don't let players modify real players
-                # TODO: Make a equality check
-                # TODO: check for full copying
+                # Don't let players modify real stuff
+                deckState = deepcopy(self.deck.getState())
+                graveState = deepcopy(self.grave.getState())
                 playercopy = deepcopy(self.players)
                 action = player.getAction(card, deckState, 
                                           graveState, playercopy)
-                # TODO: organize
-                action.do()
-                self.grave.discard(card, player)
-            
+                self.grave.discard(action.card, player)
+                # End the game if nobody remains or the deck is empty
+                action.card.perform(action)
+                if len(self.players) == 1 or self.deck.size()==0:
+                    # Yes I could make this into a proper while loop
+                    self.running = False
+        winner = self.players[0]
+        # TODO: handle ties?
+        for player in self.players:
+            if player.hand.value > winner.hand.value:
+                winner = player
+        return winner
         

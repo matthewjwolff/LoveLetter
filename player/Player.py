@@ -28,3 +28,9 @@ class Player(object):
         Callback from engine to get a player's choice
         '''
         raise NotImplementedError
+    
+    def assignHand(self, card):
+        '''
+        The engine has given the player his starting hand
+        '''
+        self.hand = card
