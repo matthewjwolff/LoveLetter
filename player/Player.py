@@ -22,15 +22,23 @@ class Player(object):
     that is acting on his behalf.
     '''
 
-
     def getAction(self, dealtcard, deckstate, gravestate, players):
         '''
         Callback from engine to get a player's choice
         '''
         raise NotImplementedError
     
+    # TODO: tell the player some initial state information when calling this
     def assignHand(self, card):
         '''
         The engine has given the player his starting hand
         '''
         self.hand = card
+        
+    # TODO: Define how this works
+    def notifyOfMove(self, args):
+        raise NotImplementedError
+    
+    # ??
+    def __eq__(self, *args, **kwargs):
+        return object.__eq__(self, *args, **kwargs)

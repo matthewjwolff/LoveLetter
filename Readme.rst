@@ -10,6 +10,7 @@ Features
 
 + Automated game logic
 + Playable AI Bots
++ Various levels of AI
 + (stretch) GUI interface
 + (stretch) Networked games with **IBM BlueMix**
 

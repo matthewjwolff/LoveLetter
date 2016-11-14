@@ -44,6 +44,7 @@ class Engine(object):
         self.players.append(player)
     
     def runGame(self):
+        # TODO: maintain set of original players?
         assert len(self.players >= 2)
         for player in self.players:
             player.assignHand(self.deck.getCard())
@@ -58,8 +59,13 @@ class Engine(object):
                 playercopy = deepcopy(self.players)
                 action = player.getAction(card, deckState, 
                                           graveState, playercopy)
+                # check to be sure that the engine 
+                # works with the original copies
+                # TODO: maintain the full action (who targeted whom, and what
+                # was discovered from that
                 self.grave.discard(action.card, player)
                 # End the game if nobody remains or the deck is empty
+                # TODO: pass in state of game
                 action.card.perform(action)
                 if len(self.players) == 1 or self.deck.size()==0:
                     # Yes I could make this into a proper while loop

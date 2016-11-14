@@ -12,6 +12,8 @@ class Card(object):
     from 1-8, a callback to perform its effect, and (possibly) a tally of the 
     total number of this type of card in a game.
     '''
-
+    
+    # Note to kristen: if you need more parameters, add them in and I'll 
+    # refactor the engine to work with it
     def perform(self, action):
         raise NotImplementedError
