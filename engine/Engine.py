@@ -57,16 +57,16 @@ class Engine(object):
                 deckState = deepcopy(self.deck.getState())
                 graveState = deepcopy(self.grave.getState())
                 playercopy = deepcopy(self.players)
-                action = player.getAction(card, deckState, 
+                playedCard = player.getAction(card, deckState, 
                                           graveState, playercopy)
-                # check to be sure that the engine 
-                # works with the original copies
-                # TODO: maintain the full action (who targeted whom, and what
-                # was discovered from that
-                self.grave.discard(action.card, player)
+                # TODO: replace target on playedCard with real player
+                playedCard.perform()
+                # Tell other players that a play occurred
+                for oplayer in self.players:
+                    if oplayer != player:
+                        oplayer.notifyOfMove(playedCard) 
+                self.grave.discard(playedCard)
                 # End the game if nobody remains or the deck is empty
-                # TODO: pass in state of game
-                action.card.perform(action)
                 if len(self.players) == 1 or self.deck.size()==0:
                     # Yes I could make this into a proper while loop
                     self.running = False

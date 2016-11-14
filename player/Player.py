@@ -29,16 +29,22 @@ class Player(object):
         raise NotImplementedError
     
     # TODO: tell the player some initial state information when calling this
+    # i.e. how many players are playing
     def assignHand(self, card):
         '''
         The engine has given the player his starting hand
         '''
         self.hand = card
         
-    # TODO: Define how this works
-    def notifyOfMove(self, args):
+    def notifyOfMove(self, card):
+        '''
+        On another player's move, this method is called for all other players 
+        to serve as notification that a move occurred.
+        '''
         raise NotImplementedError
     
-    # ??
-    def __eq__(self, *args, **kwargs):
-        return object.__eq__(self, *args, **kwargs)
+    def __eq__(self, other):
+        '''
+        A way to identify the player. Useful for deepcopying
+        '''
+        raise NotImplementedError

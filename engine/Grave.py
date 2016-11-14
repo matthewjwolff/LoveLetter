@@ -8,7 +8,8 @@ The set of already-played cards, including who played them and in what order.
 
 class Grave(object):
     '''
-    classdocs
+    The graveyard contains the list of played cards, who was targeted, and 
+    what happened because of it.
     '''
 
 

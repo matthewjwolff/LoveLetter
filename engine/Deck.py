@@ -11,11 +11,6 @@ class Deck(object):
     The Deck contains all the cards in the game. Notably, it instantiates 
     itself with a random permutation of the standard Love Letter deck and 
     exposes a way to draw from this random permutation.
-    
-    It also provides a way to query how many cards are remaining, and what 
-    card types have and have not been exhausted. 
-    
-    TODO: this might be redundant, maybe the Grave could handle this?
     '''
 
 
