@@ -5,6 +5,8 @@ The set of cards in the deck
 
 @author: mjw
 '''
+from cards import Baron, Countess, Prince, Princess, King, Handmaid, Priest, Guard
+from random import randint
 
 class Deck(object):
     '''
@@ -12,26 +14,28 @@ class Deck(object):
     itself with a random permutation of the standard Love Letter deck and 
     exposes a way to draw from this random permutation.
     '''
-
+    
+    unshuffled = [Princess, Countess, King, Prince, Prince, 
+                  Handmaid, Handmaid, Baron, Baron, Priest, 
+                  Priest, Priest, Guard, Guard, Guard, Guard, Guard]
 
     def __init__(self, params):
         '''
-        Constructor
+        Randomly pull constructors out of the unshuffled list. Don't pull the 
+        same one twice. Then create an instance and add to the deck
         '''
-        pass
+        self.shuffled = []
+        indices = list(range(0, len(self.unshuffled)))
+        while len(indices) != 0:
+            index = randint(0, len(indices) - 1)
+            clazz = self.unshuffled[index]
+            self.shuffled += [clazz()]
+            indices.remove(index)
     
     def getCard(self):
-        '''
-        Deal a card
-        '''
-        pass
-    
-    def getState(self):
-        '''
-        Get a structure holding the number of remaining cards and their 
-        possible types.
-        Make sure to return a copy, do not give back references to the source 
-        of truth
-        Or do, and let the engine handle copying?
-        '''
-        pass
+        if len(self.shuffle) == 0:
+            return None
+        else:
+            top = self.shuffled[0]
+            self.shuffled = self.shuffled[1:]
+            return top
