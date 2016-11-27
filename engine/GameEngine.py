@@ -54,11 +54,11 @@ class GameEngine(object):
         while self.running == True :
             for player in self.players :
                 card = self.deck.getCard()
-                # Don't let players modify real stuff
-                deckState = deepcopy(self.deck.getState())
-                graveState = deepcopy(self.grave.getState())
-                playercopy = deepcopy(self.players)
-                playedCard = player.getAction(card, deckState, 
+                # I changed my mind, no deep copying
+                deckState = self.deck.getState()
+                graveState = self.grave.getState()
+                playercopy = self.players
+                action = player.getAction(card, deckState, 
                                           graveState, playercopy)
                 # TODO: replace target on playedCard with real player
                 playedCard.perform()
