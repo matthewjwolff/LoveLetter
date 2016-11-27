@@ -5,13 +5,13 @@ Created on Nov 26, 2016
 '''
 from engine.Card import Card
 
-class Countess(Card):
+class Handmaid(Card):
     '''
     classdocs
     '''
 
 
-    def __init__(self, params):
+    def __init__(self):
         '''
         Constructor
         '''

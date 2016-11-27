@@ -6,11 +6,11 @@ The game loop runner
 @author: mjw
 '''
 
-from . import Deck
-from . import Grave
+from .Deck import Deck
+from .Grave import Grave
 from copy import deepcopy
 
-class Engine(object):
+class GameEngine(object):
     '''
     The engine registers players, instantiates the game, runs the gameplay 
     loop, and executes actions that transition the game from state to state. 
@@ -30,7 +30,7 @@ class Engine(object):
     exercise good coding practice.
     '''
 
-    def __init__(self, params):
+    def __init__(self):
         '''
         Constructor
         '''
@@ -45,11 +45,12 @@ class Engine(object):
     
     def runGame(self):
         # TODO: maintain set of original players?
-        assert len(self.players >= 2)
+        assert len(self.players) >= 2
         for player in self.players:
             player.assignHand(self.deck.getCard())
         # discard one
         self.discarded = self.deck.getCard()
+        self.running = True
         while self.running == True :
             for player in self.players :
                 card = self.deck.getCard()
