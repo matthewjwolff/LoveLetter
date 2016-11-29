@@ -19,8 +19,19 @@ class Card(object):
     this class. By doing this, browsing the graveyard will also browse known
     information
     '''
+    type = '' # type of card
+    value = 0 # card value/ranking 
+    count = 0 # number of cards of this type in game??? need???
+
+    '''
+    note to matt: how do you want to keep track of count
+    of cards in game?
+    '''
     
     # Note to kristen: if you need more parameters, add them in and I'll 
     # refactor the engine to work with it
+
     def perform(self, action, players, grave, deck):
-        raise NotImplementedError
+        self.type = type # return parameters on check
+        self.value = value
+        self.count = count
