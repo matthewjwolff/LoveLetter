@@ -17,10 +17,10 @@ class Baron(Card):
 	    value = 2
 	    count = 0
     
-    def perform(self):
+    def perform(self, player, card):
     	# select player with perceived lower card (>2)
     	# compare card values
-    	# if player.value > 2 -> move self.card to gy; bot out
-    	# if player.value < 2 -> move player.card to gy; player out
+    	# if player.hand.card > 2 -> move self.card to gy; bot out
+    	# if player.hand.card < 2 -> move player.card to gy; player out
     	# test
         
