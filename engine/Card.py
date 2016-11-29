@@ -19,7 +19,7 @@ class Card(object):
     this class. By doing this, browsing the graveyard will also browse known
     information
     '''
-    type = '' # type of card
+    person = '' # type of card
     value = 0 # card value/ranking 
     count = 0 # number of cards of this type in game??? need???
 
@@ -32,6 +32,6 @@ class Card(object):
     # refactor the engine to work with it
 
     def perform(self, action, players, grave, deck):
-        self.type = type # return parameters on check
+        self.type = person # return parameters on check
         self.value = value
         self.count = count
