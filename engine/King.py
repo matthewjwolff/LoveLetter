@@ -15,4 +15,12 @@ class King(Card):
         '''
         Constructor
         '''
+        person = "King"
+        value = 6
+        count = 0
+
+    def perform(self, player, card):
+    	# select player
+    	# swap hands
+    	# discard card
         

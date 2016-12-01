@@ -16,4 +16,12 @@ class Handmaid(Card):
         '''
         Constructor
         '''
+        person = "Handmaid"
+        value = 4
+        count = 0
+
+     def perform(self, player, card):
+     	# remove player from the round selection?
+     	# how to do this on my end?
+     	# discard card
         

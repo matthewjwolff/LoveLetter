@@ -15,4 +15,13 @@ class Prince(Card):
         '''
         Constructor
         '''
+        person = "Prince"
+        value = 5
+        count = 0
+
+    def perform(self, player, card):
+    	# choose player to discard hand
+    	# discard player's hand
+    	# force a redraw
+    	# discard card
         

@@ -15,4 +15,11 @@ class Priest(Card):
         '''
         Constructor
         '''
+        person = "Priest"
+        value = 2
+        count = 0
+
+    def perform(self, player, card):
+    	# reveal another player's hand
+    	# add to knowledge base?
         
