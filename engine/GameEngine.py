@@ -61,12 +61,12 @@ class GameEngine(object):
                 action = player.getAction(card, deckState, 
                                           graveState, playercopy)
                 # TODO: replace target on playedCard with real player
-                playedCard.perform()
+                action.playedCard.perform(self.players, self.grave, self.deck)
                 # Tell other players that a play occurred
                 for oplayer in self.players:
                     if oplayer != player:
-                        oplayer.notifyOfMove(playedCard) 
-                self.grave.discard(playedCard)
+                        oplayer.notifyOfMove(action) 
+                self.grave.discard(action)
                 # End the game if nobody remains or the deck is empty
                 if len(self.players) == 1 or self.deck.size()==0:
                     # Yes I could make this into a proper while loop
