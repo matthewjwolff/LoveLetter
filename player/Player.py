@@ -36,15 +36,9 @@ class Player(object):
         '''
         self.hand = card
         
-    def notifyOfMove(self, card):
+    def notifyOfAction(self, action):
         '''
         On another player's move, this method is called for all other players 
         to serve as notification that a move occurred.
-        '''
-        raise NotImplementedError
-    
-    def __eq__(self, other):
-        '''
-        A way to identify the player. Useful for deepcopying
         '''
         raise NotImplementedError

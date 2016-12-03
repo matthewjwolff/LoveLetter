@@ -63,7 +63,7 @@ class GameEngine(object):
                 # Tell other players that a play occurred
                 for oplayer in self.players:
                     if oplayer != player:
-                        oplayer.notifyOfMove(action) 
+                        oplayer.notifyOfAction(action) 
                 self.grave += [action]
                 # End the game if nobody remains or the deck is empty
                 if len(self.players) == 1 or self.deck.size()==0:

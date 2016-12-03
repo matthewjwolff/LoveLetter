@@ -9,7 +9,7 @@ class Action(object):
     Simple struct to contain the necessary information to return to the engine
     '''
 
-    def __init__(self, playedCard, target, guess):
+    def __init__(self, doer, playedCard, target, guess):
         '''
         playedCard is the card that the player wishes to play
         
@@ -19,6 +19,7 @@ class Action(object):
         guess is the card type (class) that the player guesses (in the case of the Guard)
         do not construct a class. not that it would do anything? 
         '''
+        self.doer = doer
         self.playedCard = playedCard
         self.target = target
         self.guess = guess

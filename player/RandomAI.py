@@ -14,12 +14,19 @@ class RandomAI(Player):
     
     Alternately, it is an AI that always takes a random choice.
     '''
+    
+    numBots = 0
 
     def __init__(self):
-        '''
-        Constructor
-        '''
+        self.number = RandomAI.numBots
+        RandomAI.numBots+=1
     
     def getAction(self, dealtcard, deckSize, gravestate, players):
         # TODO: Make target not self in case of non-handmaid, self in case of handmaid
-        return Action(random.choice((self.hand, dealtcard)), random.choice(players), Baron)
+        return Action(self, random.choice((self.hand, dealtcard)), random.choice(players), Baron)
+    
+    def notifyOfAction(self, action):
+        pass
+    
+    def __str__(self):
+        return "RandomAI"+self.number

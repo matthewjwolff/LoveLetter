@@ -28,5 +28,5 @@ class EasyAI(Player):
         '''
         raise NotImplementedError
     
-    def notifyOfMove(self, args):
+    def notifyOfAction(self, args):
         raise NotImplementedError        
