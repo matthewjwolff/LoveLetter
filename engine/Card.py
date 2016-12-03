@@ -22,5 +22,5 @@ class Card(object):
     
     # Note to kristen: if you need more parameters, add them in and I'll 
     # refactor the engine to work with it
-    def perform(self):
+    def perform(self, action, players, grave, deck):
         raise NotImplementedError

@@ -22,7 +22,7 @@ class EasyAI(Player):
         Constructor
         '''
         
-    def getAction(self, dealtcard, deckstate, gravestate, players):
+    def getAction(self, dealtcard, deckSize, gravestate, players):
         '''
         Callback from engine to get a player's choice
         '''
