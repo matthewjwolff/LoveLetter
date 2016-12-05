@@ -17,10 +17,17 @@ class Baron(Card):
 	    value = 2
 	    count = 0
     
-    def perform(self, player, card):
+    def perform(self, action, players, grave, deck):
     	# select player with perceived lower card (>2)
     	# compare card values
-    	# if player.hand.card > 2 -> move self.card to gy; bot out
-    	# if player.hand.card < 2 -> move player.card to gy; player out
-    	# test
+    	# if their hand has a higher value, remove self and self.hand
+        # if self hand has a higher value, remove target and target.hand
+        # if equal, discard baron, nothing happens
+        if action.target.hand.value > action.doer.hand.value:
+            grave.append(action.doer.hand)
+            players.remove(action.doer)
+        elif action.target.hand.value < action.doer.hand.value:
+            grave.append(action.target.hand)
+            players.remove(action.target)
+
         

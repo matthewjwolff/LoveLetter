@@ -17,10 +17,13 @@ class Guard(Card):
         '''
         person = "Guard"
     	value = 1
-    	count = 0
 
-    def perform(self, player, card):
-    	# pick player to "guess" type of card (can't be guard)
-    	# if guess correctly -> player is out, discard card
-    	# if guess wrong -> discard card
+    def perform(self, action, players, grave, deck):
+        # guess a target's card
+        # if correct, remove the target from game
+        # if wrong, discard guard
+        if action.guess == type(action.target.hand):
+            players.remove(action.target)
+            grave.append(action.target.hand) # moves card into grave
+
         
