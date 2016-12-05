@@ -42,6 +42,7 @@ class StdoutInterface(object):
             else:
                 chosen = True
         if playerChoice==0:
+            # they chose a guard, better see what they want to guess
             chosen = False
             while(not chosen):
                 print("What card do you guess?")
