@@ -5,14 +5,6 @@ Base class for all cards.
 
 @author: mjw
 '''
-from engine.Handmaid import Handmaid
-from engine.Guard import Guard
-from engine.Priest import Priest
-from engine.Prince import Prince
-from engine.King import King
-from engine.Countess import Countess
-from engine.Princess import Princess
-from engine.Baron import Baron
 
 class Card(object):
     '''
@@ -27,8 +19,6 @@ class Card(object):
     this class. By doing this, browsing the graveyard will also browse known
     information
     '''
-    
-    cardTypes = (Guard, Baron, Priest, Handmaid, Prince, King, Countess, Princess)
     
     # Note to kristen: if you need more parameters, add them in and I'll 
     # refactor the engine to work with it

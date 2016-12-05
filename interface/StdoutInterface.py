@@ -4,7 +4,7 @@ Created on Dec 2, 2016
 @author: mjw
 '''
 from player.HumanProxy import HumanProxy
-from engine.Card import Card
+from engine.util import cardTypes
 from engine.Action import Action
 
 class StdoutInterface(object):
@@ -44,14 +44,14 @@ class StdoutInterface(object):
         chosen = False
         while(not chosen):
             print("What card do you guess?")
-            for i in range(len(Card.cardTypes)):
-                print(i+". "+Card.cardTypes[i])
+            for i in range(len(cardTypes)):
+                print(i+". "+cardTypes[i])
             guessChoice = input(">")
-            if guessChoice < 0 or guessChoice > len(Card.cardTypes):
+            if guessChoice < 0 or guessChoice > len(cardTypes):
                 print("Bad choice")
             else:
                 chosen = True
-        return Action(self.proxy, self.proxy.hand if cardChoice == 0 else dealtcard, players[playerChoice], Card.cardTypes[guessChoice])
+        return Action(self.proxy, self.proxy.hand if cardChoice == 0 else dealtcard, players[playerChoice], cardTypes[guessChoice])
                 
     def __init__(self):
         self.proxy = HumanProxy(self.notifyCallback, self.actionCallback)
