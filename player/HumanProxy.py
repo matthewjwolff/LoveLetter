@@ -18,12 +18,16 @@ class HumanProxy(Player):
     '''
 
 
-    def __init__(self, actionCallback, notifyCallback):
+    def __init__(self, actionCallback, notifyCallback, name):
         self.actionCallback = actionCallback
         self.notifyCallback = notifyCallback
+        self.name = name
         
     def getAction(self, dealtcard, deckSize, gravestate, players):
-        return self.actionCallback(self, dealtcard, deckSize, gravestate, players)
+        return self.actionCallback(dealtcard, deckSize, gravestate, players)
         
     def notifyOfAction(self, action):
-        self.notifyCallback(self, action)
+        self.notifyCallback(action)
+        
+    def __str__(self):
+        return self.name
