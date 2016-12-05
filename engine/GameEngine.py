@@ -12,20 +12,6 @@ class GameEngine(object):
     '''
     The engine registers players, instantiates the game, runs the gameplay 
     loop, and executes actions that transition the game from state to state. 
-    
-    It should be noted that whenever interaction from players is queried, 
-    COPIES of data are delivered to the player classes, and not the actual 
-    data. Remember that Python does not have protection facilities in it, so 
-    there is no way to ensure that a player does not modify game data. So we 
-    pass copies of data, not references to it.
-    
-    Also note that if data intended to be kept is returned from the player, 
-    that data too will have to be copied. There is no guarantee that the 
-    player has released control of that data. 
-    
-    Yes we're the only ones programming this, and yes we could just have the 
-    players not touch global state, but we'll use this as an opportunity to 
-    exercise good coding practice.
     '''
 
     def __init__(self):

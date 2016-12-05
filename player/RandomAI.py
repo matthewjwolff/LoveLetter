@@ -7,6 +7,7 @@ from player.Player import Player
 from engine.Action import Action
 import random
 from engine.Baron import Baron
+from engine.Handmaid import Handmaid
 
 class RandomAI(Player):
     '''
@@ -22,8 +23,14 @@ class RandomAI(Player):
         RandomAI.numBots+=1
     
     def getAction(self, dealtcard, deckSize, gravestate, players):
-        # TODO: Make target not self in case of non-handmaid, self in case of handmaid
-        return Action(self, random.choice((self.hand, dealtcard)), random.choice(players), Baron)
+        # ok it's not totally random, but let's not have the bot be a total fool
+        # and just play the handmaid on someone else
+        target = self
+        if not isinstance(dealtcard, Handmaid):
+            while target is self:
+                target = random.choice(players)
+            
+        return Action(self, random.choice((self.hand, dealtcard)), target, Baron)
     
     def notifyOfAction(self, action):
         pass
