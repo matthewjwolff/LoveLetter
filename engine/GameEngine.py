@@ -18,17 +18,18 @@ class GameEngine(object):
         '''
         Constructor
         '''
-        self.players = []
+        self.origplayers = []
         self.deck = Deck()
         self.running = False
         self.grave = []
         self.discarded = None
     
     def addPlayer(self, player):
-        self.players.append(player)
+        self.origplayers.append(player)
     
     def runGame(self):
-        # TODO: maintain set of original players?
+        # make a NEW list
+        self.players = list(self.origplayers)
         assert len(self.players) >= 2
         for player in self.players:
             player.assignHand(self.deck.getCard())
