@@ -36,4 +36,4 @@ class RandomAI(Player):
         pass
     
     def __str__(self):
-        return "RandomAI"+self.number
+        return "RandomAI"+str(self.number)
