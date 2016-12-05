@@ -7,12 +7,13 @@ Created on Nov 3, 2016
 from player.RandomAI import RandomAI
 from engine.GameEngine import GameEngine
 from debug.DebugEngine import DebugEngine
+from interface.StdoutInterface import StdoutInterface
 
 def main():
     game = DebugEngine()
-    p1 = RandomAI()
+    p1 = StdoutInterface("Jerry Lewis")
     p2 = RandomAI()
-    game.addPlayer(p1)
+    game.addPlayer(p1.proxy)
     game.addPlayer(p2)
     winner = game.runGame()
     print ("The winner of the game is "+str(winner))

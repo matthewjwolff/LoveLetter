@@ -16,7 +16,7 @@ class DebugEngine(GameEngine):
         '''
         Constructor
         '''
-        self.players = []
+        self.origplayers = []
         self.deck = DebugDeck()
         self.running = False
         self.grave = []
