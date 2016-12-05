@@ -42,3 +42,10 @@ class Player(object):
         to serve as notification that a move occurred.
         '''
         raise NotImplementedError
+
+    def priestKnowledge(self, player, card):
+        '''
+        When the Priest is played, add knowledge of a target player's
+        hand to self.
+        '''
+        raise NotImplementedError

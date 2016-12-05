@@ -17,9 +17,9 @@ class Priest(Card):
         '''
         person = "Priest"
         value = 2
-        count = 0
 
-    def perform(self, player, card):
+    def perform(self, action, players, grave, deck):
     	# reveal another player's hand
     	# add to knowledge base?
+        action.doer.priestKnowledge(action.target, action.target.hand)
         

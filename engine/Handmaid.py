@@ -18,9 +18,8 @@ class Handmaid(Card):
         '''
         person = "Handmaid"
         value = 4
-        count = 0
 
-     def perform(self, player, card):
+     def perform(self, action, players, grave, deck):
      	# remove player from the round selection?
      	# how to do this on my end?
      	# discard card
