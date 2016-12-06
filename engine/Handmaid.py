@@ -19,9 +19,9 @@ class Handmaid(Card):
         person = "Handmaiden"
         value = 4
 
-     def perform(self, action, players, grave, deck):
-     	# remove player from the round selection?
-     	# how to do this on my end?
-     	# discard card
+    def perform(self, action, players, grave, deck):
+        # remove player from the round selection?
+        # how to do this on my end?
+        # discard card
         action.doer.handmaidenFlag = True
         

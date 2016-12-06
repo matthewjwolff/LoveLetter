@@ -4,6 +4,7 @@ Created on Nov 26, 2016
 @author: mjw
 '''
 from engine.Card import Card
+from engine.Action import Action
 
 class Guard(Card):
     '''
@@ -16,7 +17,7 @@ class Guard(Card):
         Constructor
         '''
         person = "Guard"
-    	value = 1
+        value = 1
 
     def perform(self, action, players, grave, deck):
         # guess a target's card

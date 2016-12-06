@@ -10,7 +10,7 @@ from debug.DebugEngine import DebugEngine
 from interface.StdoutInterface import StdoutInterface
 
 def main():
-    game = DebugEngine()
+    game = GameEngine()
     p1 = StdoutInterface("Jerry Lewis")
     p2 = RandomAI()
     game.addPlayer(p1.proxy)
