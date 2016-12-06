@@ -32,24 +32,21 @@ class HardAI(Player):
         self.playerRanges = {}
 
     def getAction(self, dealtCard, deckSize, graveState, players):
-        player = self
-        guess = None
+        # Implement action heuristics
 
-        if self.hand.value() > dealtCard.value():
-            chosenCard = dealtCard
-        else:
-            chosenCard = self.hand
 
-        # Cards that require player to target someone
-        targetCards = [1, 2, 3, 4, 6]
 
-        if chosenCard.value() in targetCards:
-            player = self.chooseRandom(players)
 
-            if isinstance(chosenCard, Guard):
-                guess = self.chooseRandomCard()
 
-        return Action(self, chosenCard, player, guess)
+
+
+
+
+
+
+
+
+
 
     def notifyOfAction(self, action, graveState):
         # Decrement amount of cards in play
@@ -61,31 +58,7 @@ class HardAI(Player):
         if action.doer not in self.playerRanges.keys():
             self.playerRanges[action.doer] = [1,2,3,4,5,6,7,8]
 
-        # if discarded card is in player range - reset range
-        if action.playedCard.value() in self.playerRanges[action.doer]:
-            self.playerRanges[action.doer] = [1, 2, 3, 4, 5, 6, 7, 8]
-
-        # if Countess discarded, high probability of Prince, King, Princess
-        if isinstance(action.playedCard, Countess):
-            self.playerRanges[action.doer] = [5,6,8]
-
-        elif isinstance(action.playedCard, Baron):
-            # Action of discarding after comparing cards
-            loserAction = graveState[graveState.length()-2]
-            lower = loserAction.playedCard.value()
-            if action.doer == loserAction.doer:
-                self.playerRanges[action.target] = range(lower+1, 9)
-            else:
-                self.playerRanges[action.doer] = range(lower + 1, 9)
-
-        elif isinstance(action.playedCard, Priest):
-            self.playerRanges[action.target] = self.priestKnowledge
-
-
-        elif isinstance(action.playedCard, Guard):
-            self.playerRanges[action.target].remove(action.guess)
-
-
+        self.pruningRanges(action, graveState)
 
     def chooseRandom(self, players):
         player = self
@@ -99,9 +72,47 @@ class HardAI(Player):
             chosen = choice(self.cardsInPlay)
         return self.getCardObject(chosen)
 
+    # Used with Guard
+    def getMinRangePlayer(self):
+        playerRangeLength = 10
+        minPlayer= None
+        for player in self.playerRanges:
+            if player.value().length() < playerRangeLength:
+                minPlayer= player
+        return minPlayer
+
     def getCardObject(self, index):
         cardObjects = [None, Guard, Priest, Baron, Handmaid, Prince, King, Countess, Princess]
         return cardObjects[index]
 
     def getPriestKnowledge(self, player, card):
         self.priestKnowledge= card
+
+    def pruningRanges(self, action, graveState):
+        # if discarded card is in player range - reset range
+        if action.playedCard.value() in self.playerRanges[action.doer]:
+            self.playerRanges[action.doer] = [1, 2, 3, 4, 5, 6, 7, 8]
+
+        # updates player range based on cardsInPlay
+        for cardType in range(1, 9):
+            if self.cardsInPlay[cardType] == 0:
+                self.playerRanges[action.doer].remove(cardType)
+
+        # if Countess discarded, high probability of Prince, King, Princess
+        if isinstance(action.playedCard, Countess):
+            self.playerRanges[action.doer] = [5, 6, 8]
+
+        elif isinstance(action.playedCard, Baron):
+            # Action of discarding after comparing cards
+            loserAction = graveState[graveState.length() - 2]
+            lower = loserAction.playedCard.value()
+            if action.doer == loserAction.doer:
+                self.playerRanges[action.target] = range(lower + 1, 9)
+            else:
+                self.playerRanges[action.doer] = range(lower + 1, 9)
+
+        elif isinstance(action.playedCard, Priest):
+            self.playerRanges[action.target] = self.priestKnowledge
+
+        elif isinstance(action.playedCard, Guard):
+            self.playerRanges[action.target].remove(action.guess)
