@@ -41,5 +41,5 @@ class Baron(Card):
         elif not bot.isAggressive and otherCard.value == 5:
             return [0, bot.chooseRandom(), None]
         else:
-            return otherCard.value
+            return [otherCard.value, bot.chooseRandom(), None]
 

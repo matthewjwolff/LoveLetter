@@ -88,12 +88,6 @@ class HardAI(Player):
             player = choice(players)
         return player
 
-    def chooseRandomCard(self):
-        chosen = 0
-        while (chosen == 0):
-            chosen = choice(self.cardsInPlay)
-        return self.getCardObject(chosen)
-
     # Used with Guard
     def getMinRangePlayer(self):
         playerRangeLength = 10

@@ -36,4 +36,4 @@ class Card(object):
 
     def getHeuristic(self, bot, otherCard):
         # Default Heuristic
-        return otherCard.value
+        return [otherCard.value, None, None]
