@@ -34,7 +34,7 @@ class RandomAI(Player):
             
         return Action(self, choice, target, Baron)
     
-    def notifyOfAction(self, action):
+    def notifyOfAction(self, action, graveState):
         pass
     
     def priestKnowledge(self, player, card):

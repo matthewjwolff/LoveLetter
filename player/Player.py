@@ -36,7 +36,7 @@ class Player(object):
         '''
         self.hand = card
         
-    def notifyOfAction(self, action):
+    def notifyOfAction(self, action, graveState):
         '''
         On another player's move, this method is called for all other players 
         to serve as notification that a move occurred.

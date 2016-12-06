@@ -54,11 +54,11 @@ class GameEngine(object):
                     # the deck
                     player.hand = card
                 action.playedCard.perform(action, self.players, self.grave, self.deck)
+                self.grave += [action]
                 # Tell other players that a play occurred
                 for oplayer in self.players:
                     if oplayer != player:
-                        oplayer.notifyOfAction(action) 
-                self.grave += [action]
+                        oplayer.notifyOfAction(action, self.grave)
                 # End the game if nobody remains or the deck is empty
                 if len(self.players) == 1 or self.deck.size()==0:
                     # Yes I could make this into a proper while loop

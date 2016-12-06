@@ -3,7 +3,7 @@ Created on Nov 13, 2016
 
 Easy AI player 
 
-@author: mjw
+@author: Ben, Patrick, Josh
 '''
 from engine.Countess import Countess
 from engine.Baron import Baron
@@ -52,7 +52,7 @@ class EasyAI(Player):
         return Action(self, chosenCard, player, guess)
 
     
-    def notifyOfAction(self, action):
+    def notifyOfAction(self, action, graveState):
         self.cardsInPlay[action.playedCard] -= 1
 
     def chooseRandom(self, players):
