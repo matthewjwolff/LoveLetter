@@ -26,5 +26,8 @@ class Countess(Card):
 
     def getHeuristic(self, bot, otherCard, players):
         # TODO: implement early/mid/late game
+        # TODO: engine-wide change of countess / handmaid target to None
         if choice(range(10)) == 1:
-            return [7, None, None]
+            return [10, bot, None]
+        else:
+            return [0, bot, None]

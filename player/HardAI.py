@@ -70,9 +70,9 @@ class HardAI(Player):
         card2Heuristic = card2.getHeuristic(self, card1, players)
 
         if(card1Heuristic[0] > card2Heuristic[0]):
-            return Action(self, self.hand, card1Heuristic[1], card1Heuristic[2])
+            return Action(self, card2, card2Heuristic[1], card2Heuristic[2])
         else:
-            return Action(self, dealtCard, card2Heuristic[1], card2Heuristic[2])
+            return Action(self, card1, card1Heuristic[1], card1Heuristic[2])
 
         # Action(doer, playedCard, target, guess)
         
@@ -98,8 +98,10 @@ class HardAI(Player):
         playerRangeLength = 10
         minPlayer= None
         for player in self.playerRanges:
-            if len(self.playerRanges[player]) < playerRangeLength:
-                minPlayer= player
+            # TODO: fix logic
+            if player != self:
+                if len(self.playerRanges[player]) < playerRangeLength:
+                    minPlayer= player
         return minPlayer
 
     def getCardObject(self, index):
@@ -107,7 +109,7 @@ class HardAI(Player):
         return cardObjects[index]
 
     def priestKnowledge(self, player, card):
-        self.priestKnown= card
+        self.playerRanges[player] = [card.value]
 
     def pruneRanges(self, action, graveState):
         # if discarded card is in player range - reset range
@@ -116,7 +118,8 @@ class HardAI(Player):
 
         # updates player range based on cardsInPlay
         for cardType in range(1, 9):
-            if self.cardsInPlay[cardType] == 0:
+            if self.cardsInPlay[cardType] == 0 and cardType in self.playerRanges[action.doer]:
+                # just in case it's wrong
                 self.playerRanges[action.doer].remove(cardType)
 
         # if Countess discarded, high probability of Prince, King, Princess
@@ -128,12 +131,12 @@ class HardAI(Player):
             loserAction = graveState[len(graveState) - 2]
             lower = loserAction.playedCard.value
             if action.doer == loserAction.doer:
-                self.playerRanges[action.target] = range(lower + 1, 9)
+                self.playerRanges[action.target] = list(range(lower + 1, 9))
             else:
-                self.playerRanges[action.doer] = range(lower + 1, 9)
-
-        elif isinstance(action.playedCard, Priest):
-            self.playerRanges[action.target] = self.priestKnown
+                self.playerRanges[action.doer] = list(range(lower + 1, 9))
+#         Was once used to gain knowledge from playing the priest
+#         elif isinstance(action.playedCard, Priest):
+#             self.playerRanges[action.target] = self.priestKnown
 
         elif isinstance(action.playedCard, Guard):
             if action.target != self:
