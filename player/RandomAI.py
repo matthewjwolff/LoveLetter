@@ -8,6 +8,7 @@ from engine.Action import Action
 import random
 from engine.Baron import Baron
 from engine.Handmaid import Handmaid
+import engine.util
 
 class RandomAI(Player):
     '''
@@ -32,7 +33,8 @@ class RandomAI(Player):
             while target is self:
                 target = random.choice(players)
             
-        return Action(self, choice, target, Baron)
+        classIndex = random.randrange(1,len(engine.util.cardTypes))
+        return Action(self, choice, target, engine.util.cardTypes[classIndex])
     
     def notifyOfAction(self, action, graveState):
         pass
