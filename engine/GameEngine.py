@@ -25,12 +25,14 @@ class GameEngine(object):
         self.running = False
         self.grave = []
         self.discarded = None
+        self.eliminatedThisRound = None
     
     def addPlayer(self, player):
         self.origplayers.append(player)
     
     def runGame(self):
         # make a NEW list
+        print(self.deck.shuffled)
         self.players = list(self.origplayers)
         assert len(self.players) >= 2
         for player in self.players:
@@ -40,6 +42,7 @@ class GameEngine(object):
         self.running = True
         while self.running == True :
             for player in self.players :
+                self.eliminatedThisRound = None
                 player.handmaidenFlag = False
                 card = self.deck.getCard()
                 # I changed my mind, no deep copying
@@ -63,11 +66,14 @@ class GameEngine(object):
                     # TODO: give all players notification
                     if oplayer != player:
                         oplayer.notifyOfAction(action, self.grave)
+                if self.eliminatedThisRound != None:
+                    self.notifyAllEliminate()
                 self.grave += [action]
                 # End the game if nobody remains or the deck is empty
                 if len(self.players) == 1 or self.deck.size()==0:
-                    # Yes I could make this into a proper while loop
+                    # kick out of the loop immediately
                     self.running = False
+                    break
         winner = self.players[0]
         # TODO: handle ties?
         for player in self.players:
@@ -75,11 +81,30 @@ class GameEngine(object):
                 winner = player
         return winner
     
+    # TODO: make this not state based
+    def notifyAllEliminate(self):
+        for player in self.players:
+            player.notifyEliminate(self.eliminatedThisRound)
+    
     def discard(self, player, card):
         '''
         Safely force a player to discard a card, and apply any effects if necessary.
         ex: the prince forces a princess discard, that player should lose
+        
+        This should only ever be called by the prince...
         '''
+        self.grave.append(Action(player, card, None, None))
         if type(card)==Princess:
             self.players.remove(player)
-        self.grave.append(Action(player, card, None, None))
+            self.eliminatedThisRound = player
+        else:
+            # the player must be given another card
+            newCard = self.deck.getCard()
+            assert(self.discarded != None)
+            if newCard != None:
+                # if the deck gave us a new card
+                player.hand = newCard
+            else:
+                # the deck is out of cards. Give the player the discarded card
+                player.hand = self.discarded
+                self.discarded = None

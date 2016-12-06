@@ -7,6 +7,7 @@ from player.HumanProxy import HumanProxy
 from engine.util import cardTypes
 from engine.Action import Action
 from engine.Guard import Guard
+from turtledemo.minimal_hanoi import play
 
 class StdoutInterface(object):
     '''
@@ -60,10 +61,13 @@ class StdoutInterface(object):
                 else:
                     chosen = True
         return Action(self.proxy, chosenCard, players[playerChoice], cardTypes[guessChoice])
+    
+    def eliminateCallback(self, player):
+        print("Player "+str(player)+ " has been eliminated")
                 
     def __init__(self, name=None):
         if name==None:
             print("What is your name?")
             name = input("> ")
-        self.proxy = HumanProxy(self.actionCallback, self.notifyCallback, self.priestCallback, name)
+        self.proxy = HumanProxy(self.actionCallback, self.notifyCallback, self.priestCallback, self.eliminateCallback, name)
         

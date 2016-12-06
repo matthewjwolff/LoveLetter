@@ -21,7 +21,8 @@ class NonRandomDeck(Deck):
 
 
     def __init__(self):
-        self.shuffled = [Princess(), Countess(), King(), Prince(), Prince(), 
-            Handmaid(), Handmaid(), Baron(), Baron(), Priest(), 
-            Priest(), Guard(), Guard(), Guard(), Guard(), Guard()]
+        self.shuffled = [Guard(), Prince(), Guard(), Countess(), Baron(), Guard(), King(), Guard(), Baron(), Handmaid(), Princess(), Priest(), Priest(), Guard(), Prince(), Handmaid()]
+#         self.shuffled = [Princess(), Countess(), King(), Guard(), Guard(), 
+#             Handmaid(), Handmaid(), Baron(), Baron(), Priest(), 
+#             Priest(), Guard(), Guard(), Guard(), Prince(), Prince()]
         

@@ -37,6 +37,10 @@ class HardAI(Player):
         self.isAggressive = isAggressive
         self.priestKnown = None
         
+    def notifyEliminate(self, player):
+        if player != self:
+            self.playerRanges.pop(player)
+        
     def assignHand(self, card, players):
         Player.assignHand(self, card, players)
                 # initialize players on first turn
@@ -131,12 +135,14 @@ class HardAI(Player):
 
         elif isinstance(action.playedCard, Baron):
             # Action of discarding after comparing cards
-            loserAction = graveState[len(graveState) - 2]
-            lower = loserAction.playedCard.value
-            if action.doer == loserAction.doer:
-                self.playerRanges[action.target] = list(range(lower + 1, 9))
-            else:
-                self.playerRanges[action.doer] = list(range(lower + 1, 9))
+            # in the very small chance that it's the beginning of the game
+            if len(graveState) >= 2:
+                loserAction = graveState[len(graveState) - 2]
+                lower = loserAction.playedCard.value
+                if action.doer == loserAction.doer:
+                    self.playerRanges[action.target] = list(range(lower + 1, 9))
+                else:
+                    self.playerRanges[action.doer] = list(range(lower + 1, 9))
 #         Was once used to gain knowledge from playing the priest
 #         elif isinstance(action.playedCard, Priest):
 #             self.playerRanges[action.target] = self.priestKnown

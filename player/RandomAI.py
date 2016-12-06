@@ -42,5 +42,8 @@ class RandomAI(Player):
     def priestKnowledge(self, player, card):
         pass
     
+    def notifyEliminate(self, player):
+        pass
+    
     def __str__(self):
         return "RandomAI"+str(self.number)

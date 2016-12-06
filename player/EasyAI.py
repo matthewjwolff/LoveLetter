@@ -81,5 +81,8 @@ class EasyAI(Player):
         cardObjects = [None, Guard, Priest, Baron, Handmaid, Prince, King, Countess, Princess]
         return cardObjects[index]
     
+    def notifyEliminate(self, player):
+        pass
+    
     def __str__(self):
         return "EasyAI"+str(self.number)

@@ -22,3 +22,4 @@ class Princess(Card):
         # remove player from the round if used
         # otherwise hold onto card at all costs
         players.remove(action.doer)
+        engine.eliminatedThisRound = action.doer

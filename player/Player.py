@@ -42,6 +42,12 @@ class Player(object):
         to serve as notification that a move occurred.
         '''
         raise NotImplementedError
+    
+    def notifyEliminate(self, player):
+        '''
+        A player has been eliminated from the game
+        '''
+        raise NotImplementedError
 
     def priestKnowledge(self, player, card):
         '''

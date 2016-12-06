@@ -18,10 +18,11 @@ class HumanProxy(Player):
     '''
 
 
-    def __init__(self, actionCallback, notifyCallback, priestCallback, name):
+    def __init__(self, actionCallback, notifyCallback, priestCallback, eliminateCallback, name):
         self.actionCallback = actionCallback
         self.notifyCallback = notifyCallback
         self.priestCallback = priestCallback
+        self.eliminateCallback = eliminateCallback
         self.name = name
         
     def getAction(self, dealtCard, deckSize, graveState, players):
@@ -32,6 +33,9 @@ class HumanProxy(Player):
     
     def priestKnowledge(self, player, card):
         self.priestCallback(player, card)
+        
+    def notifyEliminate(self, player):
+        self.eliminateCallback(player)
         
     def __str__(self):
         return self.name

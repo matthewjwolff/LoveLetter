@@ -12,7 +12,7 @@ from player.EasyAI import EasyAI
 from player.HardAI import HardAI
 
 def main():
-    game = GameEngine()
+    game = DebugEngine()
     # p1 = StdoutInterface("Jerry Lewis")
     # for hard ai
     # HardAI(playstyle (not used?), isAggressive)
