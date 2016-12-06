@@ -47,6 +47,12 @@ class GameEngine(object):
                 # list of players
                 action = player.getAction(card, len(self.deck.shuffled), 
                                           self.grave, self.players)
+                # update the player's hand
+                if action.playedCard == player.hand:
+                    # If the player chose to play the card he had kept,
+                    # then replace the card in his hand with the card from
+                    # the deck
+                    player.hand = card
                 action.playedCard.perform(action, self.players, self.grave, self.deck)
                 # Tell other players that a play occurred
                 for oplayer in self.players:
