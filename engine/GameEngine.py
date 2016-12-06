@@ -56,7 +56,7 @@ class GameEngine(object):
                 action.playedCard.perform(action, self.players, self.grave, self.deck)
                 self.grave += [action]
                 # Tell other players that a play occurred
-                for oplayer in self.players:
+                for oplayer in self.origplayers:
                     if oplayer != player:
                         oplayer.notifyOfAction(action, self.grave)
                 # End the game if nobody remains or the deck is empty

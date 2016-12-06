@@ -25,7 +25,7 @@ class Deck(object):
     
     unshuffled = [Princess, Countess, King, Prince, Prince, 
                   Handmaid, Handmaid, Baron, Baron, Priest, 
-                  Priest, Priest, Guard, Guard, Guard, Guard, Guard]
+                  Priest, Guard, Guard, Guard, Guard, Guard]
 
     def __init__(self):
         '''

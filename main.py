@@ -13,9 +13,10 @@ from player.EasyAI import EasyAI
 def main():
     game = GameEngine()
     p1 = StdoutInterface("Jerry Lewis")
-    p2 = EasyAI()
+    p2 = EasyAI(
     game.addPlayer(p1.proxy)
     game.addPlayer(p2)
+    game.addPlayer(p3)
     winner = game.runGame()
     print ("The winner of the game is "+str(winner))
 
