@@ -14,8 +14,8 @@ class Baron(Card):
         '''
         Constructor
         '''
-        person = "Baron"
-        value = 3
+        self.person = "Baron"
+        self.value = 3
     
     def perform(self, action, players, grave, deck):
         # select player with perceived lower card (>2)

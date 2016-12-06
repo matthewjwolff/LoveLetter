@@ -39,6 +39,9 @@ class Deck(object):
             self.shuffled += [clazz()]
             indices.remove(indices[index])
     
+    def size(self):
+        return len(self.shuffled)
+    
     def getCard(self):
         if len(self.shuffled) == 0:
             return None

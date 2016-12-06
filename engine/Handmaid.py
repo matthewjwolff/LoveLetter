@@ -16,8 +16,8 @@ class Handmaid(Card):
         '''
         Constructor
         '''
-        person = "Handmaiden"
-        value = 4
+        self.person = "Handmaiden"
+        self.value = 4
 
     def perform(self, action, players, grave, deck):
         # remove player from the round selection?

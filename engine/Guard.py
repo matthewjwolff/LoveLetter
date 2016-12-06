@@ -16,8 +16,8 @@ class Guard(Card):
         '''
         Constructor
         '''
-        person = "Guard"
-        value = 1
+        self.person = "Guard"
+        self.value = 1
 
     def perform(self, action, players, grave, deck):
         # guess a target's card
@@ -25,6 +25,4 @@ class Guard(Card):
         # if wrong, discard guard
         if action.guess == type(action.target.hand):
             players.remove(action.target)
-            grave.append(Action(None, action.target.hand, None, None)) # moves card into grave
-
-        
+            grave.append(Action(None, action.target.hand, None, None)) # moves card into grave        
