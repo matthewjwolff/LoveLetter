@@ -14,6 +14,7 @@ from .Princess import Princess
 from .King import King
 from .Guard import Guard
 from .Handmaid import Handmaid
+import random
 
 class Deck(object):
     '''
@@ -32,12 +33,13 @@ class Deck(object):
         same one twice. Then create an instance and add to the deck
         '''
         self.shuffled = []
-        indices = list(range(0, len(self.unshuffled)))
-        while len(indices) != 0:
-            index = randint(0, len(indices) - 1)
-            clazz = self.unshuffled[index]
-            self.shuffled += [clazz()]
-            indices.remove(indices[index])
+        for clazz in Deck.unshuffled:
+            self.shuffled.append(clazz())
+        # now shuffle
+        random.shuffle(self.shuffled)
+            
+    def size(self):
+        return len(self.shuffled)
     
     def getCard(self):
         if len(self.shuffled) == 0:

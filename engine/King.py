@@ -15,4 +15,15 @@ class King(Card):
         '''
         Constructor
         '''
+        self.person = "King"
+        self.value = 6
+
+    def perform(self, action, players, grave, deck):
+        # select player
+        # swap hands
+        doerHand = action.doer.hand
+        targetHand = action.target.hand
+        action.target.hand = doerHand
+        action.doer.hand = targetHand
+
         

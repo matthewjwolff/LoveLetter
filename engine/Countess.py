@@ -7,7 +7,7 @@ from engine.Card import Card
 
 class Countess(Card):
     '''
-    classdocs
+    Countess (1) Discard if caught with king or prince.
     '''
 
 
@@ -15,4 +15,11 @@ class Countess(Card):
         '''
         Constructor
         '''
+        self.person = "Countess"
+        self.value = 7
+
+    def perform(self, action, players, grave, deck):
+        # if king or prince in hand when drawn -> move self to gy
+        # if not -> hold onto card???
+        pass
         

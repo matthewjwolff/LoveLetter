@@ -6,19 +6,24 @@ Created on Dec 2, 2016
 from player.HumanProxy import HumanProxy
 from engine.util import cardTypes
 from engine.Action import Action
+from engine.Guard import Guard
 
 class StdoutInterface(object):
     '''
    A rather poor implementation of CLI user input using print statements
     '''
     
+    def priestCallback(self, player, card):
+        print("Player "+str(player)+" has a "+card.__class__.__name__)
+    
     def notifyCallback(self, action):
-        print("Player "+action.doer+" has played "+action.playedCard+" on "+action.target)
+        print("Player "+str(action.doer)+" has played "+action.playedCard.__class__.__name__+" on "+str(action.target))
         
     def actionCallback(self, dealtcard, deckSize, gravestate, players):
         print("You have been dealt a "+dealtcard.__class__.__name__)
         chosen = False
         cardChoice = 0
+        chosenCard = None
         playerChoice = 0
         guessChoice = 0
         while(not chosen):
@@ -30,6 +35,7 @@ class StdoutInterface(object):
                 print("Bad choice")
             else:
                 chosen = True
+                chosenCard = self.proxy.hand if cardChoice == 1 else dealtcard
         
         chosen = False
         while(not chosen):
@@ -41,7 +47,7 @@ class StdoutInterface(object):
                 print("Bad choice")
             else:
                 chosen = True
-        if playerChoice==0:
+        if type(chosenCard) == Guard:
             # they chose a guard, better see what they want to guess
             chosen = False
             while(not chosen):
@@ -53,8 +59,8 @@ class StdoutInterface(object):
                     print("Bad choice")
                 else:
                     chosen = True
-        return Action(self.proxy, self.proxy.hand if cardChoice == 0 else dealtcard, players[playerChoice], cardTypes[guessChoice])
+        return Action(self.proxy, chosenCard, players[playerChoice], cardTypes[guessChoice])
                 
     def __init__(self, name):
-        self.proxy = HumanProxy(self.actionCallback, self.notifyCallback, name)
+        self.proxy = HumanProxy(self.actionCallback, self.notifyCallback, self.priestCallback, name)
         

@@ -15,4 +15,10 @@ class Princess(Card):
         '''
         Constructor
         '''
-        
+        self.person = "Princess"
+        self.value = 8
+
+    def perform(self, action, players, grave, deck):
+        # remove player from the round if used
+        # otherwise hold onto card at all costs
+        players.remove(action.doer)

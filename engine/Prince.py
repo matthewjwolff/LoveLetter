@@ -4,6 +4,7 @@ Created on Nov 26, 2016
 @author: mjw
 '''
 from engine.Card import Card
+from engine.Action import Action
 
 class Prince(Card):
     '''
@@ -15,4 +16,14 @@ class Prince(Card):
         '''
         Constructor
         '''
+        self.person = "Prince"
+        self.value = 5
+
+    def perform(self, action, players, grave, deck):
+        # choose player to discard hand
+        # discard player's hand
+        # force a redraw
+        # discard card
+        grave.append(Action(None, action.target.hand, None, None))
+        action.target.hand = deck.getCard()
         
