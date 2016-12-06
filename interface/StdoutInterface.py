@@ -12,6 +12,9 @@ class StdoutInterface(object):
    A rather poor implementation of CLI user input using print statements
     '''
     
+    def priestCallback(self, player, card):
+        print("Player "+str(player)+" has a "+card.__class__.__name__)
+    
     def notifyCallback(self, action):
         print("Player "+action.doer+" has played "+action.playedCard+" on "+action.target)
         
@@ -56,5 +59,5 @@ class StdoutInterface(object):
         return Action(self.proxy, self.proxy.hand if cardChoice == 0 else dealtcard, players[playerChoice], cardTypes[guessChoice])
                 
     def __init__(self, name):
-        self.proxy = HumanProxy(self.actionCallback, self.notifyCallback, name)
+        self.proxy = HumanProxy(self.actionCallback, self.notifyCallback, self.priestCallback, name)
         

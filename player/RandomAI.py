@@ -35,5 +35,8 @@ class RandomAI(Player):
     def notifyOfAction(self, action):
         pass
     
+    def priestKnowledge(self, player, card):
+        pass
+    
     def __str__(self):
         return "RandomAI"+str(self.number)
