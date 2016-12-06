@@ -17,10 +17,13 @@ class King(Card):
         '''
         person = "King"
         value = 6
-        count = 0
 
-    def perform(self, player, card):
+    def perform(self, action, players, grave, deck):
     	# select player
     	# swap hands
-    	# discard card
+        doerHand = action.doer.hand
+        targetHand = action.target.hand
+        action.target.hand = doerHand
+        action.doer.hand = targetHand
+
         
