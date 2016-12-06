@@ -27,5 +27,5 @@ class Prince(Card):
         engine.discard(action.target, action.target.hand)
         action.target.hand = deck.getCard()
 
-    def getHeuristic(self, bot, otherCard):
-        return [otherCard.value, bot.chooseRandom(), None]
+    def getHeuristic(self, bot, otherCard, players):
+        return [otherCard.value, bot.chooseRandom(players), None]

@@ -31,7 +31,7 @@ class Card(object):
     # Note to kristen: if you need more parameters, add them in and I'll 
     # refactor the engine to work with it
 
-    def getHeuristic(self, bot, otherCard):
+    def getHeuristic(self, bot, otherCard, players):
         # Default Heuristic
         return [otherCard.value, None, None]
 

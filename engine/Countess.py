@@ -24,7 +24,7 @@ class Countess(Card):
         # if not -> hold onto card???
         pass
 
-    def getHeuristic(self, bot, otherCard):
+    def getHeuristic(self, bot, otherCard, players):
         # TODO: implement early/mid/late game
         if choice(range(10)) == 1:
             return [7, None, None]

@@ -13,7 +13,7 @@ from player.HardAI import HardAI
 
 def main():
     game = GameEngine()
-    p1 = StdoutInterface()
+    p1 = StdoutInterface("Jerry Lewis")
     # for hard ai
     # HardAI(playstyle (not used?), isAggressive)
     p2 = HardAI(None, True)

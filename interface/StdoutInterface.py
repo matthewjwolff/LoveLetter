@@ -61,8 +61,9 @@ class StdoutInterface(object):
                     chosen = True
         return Action(self.proxy, chosenCard, players[playerChoice], cardTypes[guessChoice])
                 
-    def __init__(self):
-        print("What is your name?")
-        name = input("> ")
+    def __init__(self, name=None):
+        if name==None:
+            print("What is your name?")
+            name = input("> ")
         self.proxy = HumanProxy(self.actionCallback, self.notifyCallback, self.priestCallback, name)
         

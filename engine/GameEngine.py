@@ -34,7 +34,7 @@ class GameEngine(object):
         self.players = list(self.origplayers)
         assert len(self.players) >= 2
         for player in self.players:
-            player.assignHand(self.deck.getCard())
+            player.assignHand(self.deck.getCard(), self.players)
         # discard one
         self.discarded = self.deck.getCard()
         self.running = True

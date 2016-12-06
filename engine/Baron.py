@@ -32,9 +32,9 @@ class Baron(Card):
             engine.grave.append(Action(action.target, action.target.hand, None, None))
             players.remove(action.target)
 
-    def getHeuristic(self, bot, otherCard):
+    def getHeuristic(self, bot, otherCard, players):
         for player in bot.playerRanges:
-            rangeEstimate = player.value()
+            rangeEstimate = bot.playerRanges[player]
             if self.value > rangeEstimate[len(rangeEstimate)-1]:
                 # return default
                 return [otherCard.value, player, None]
@@ -43,5 +43,5 @@ class Baron(Card):
         elif not bot.isAggressive and otherCard.value == 5:
             return [0, bot.chooseRandom(), None]
         else:
-            return [otherCard.value, bot.chooseRandom(), None]
+            return [otherCard.value, bot.chooseRandom(players), None]
 

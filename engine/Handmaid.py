@@ -25,5 +25,5 @@ class Handmaid(Card):
         # discard card
         action.doer.handmaidenFlag = True
 
-    def getHeuristic(self, bot, otherCard):
-        return [otherCard.value, self, None]
+    def getHeuristic(self, bot, otherCard, players):
+        return [otherCard.value, bot, None]

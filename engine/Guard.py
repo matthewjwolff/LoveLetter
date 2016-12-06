@@ -29,7 +29,7 @@ class Guard(Card):
             # It's ok to directly discard here. The player has already lost.
             engine.grave.append(Action(action.target, action.target.hand, None, None)) # moves card into engine
 
-    def getHeuristic(self, bot, otherCard):
-        target = bot.getMinRange()
+    def getHeuristic(self, bot, otherCard, players):
+        target = bot.getMinRangePlayer()
         guess = choice(bot.playerRanges[target])
         return [otherCard.value, target, guess]

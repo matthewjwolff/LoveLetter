@@ -35,6 +35,14 @@ class HardAI(Player):
         self.cardsInPlay = [0, 5, 2, 2, 2, 2, 1, 1, 1]
         self.playerRanges = {}
         self.isAggressive = isAggressive
+        self.priestKnown = None
+        
+    def assignHand(self, card, players):
+        Player.assignHand(self, card, players)
+                # initialize players on first turn
+        for player in players:
+            if player != self:
+                self.playerRanges[player] = [1,2,3,4,5,6,7,8]
 
     # self.hand == card in hand, dealtCard == card drawn
     def getAction(self, dealtCard, deckSize, graveState, players):
@@ -43,11 +51,11 @@ class HardAI(Player):
 
         # Princess Force Move
         if isinstance(card1, Princess):
-            param = card2.getHeuristic(self, card1)
-            return Action(self, dealtCard, param[1], param[2])
+            param = card2.getHeuristic(self, card1, players)
+            return Action(self, card2, param[1], param[2])
         elif isinstance(card2, Princess):
-            param = card1.getHeuristic(self, card2)
-            return Action(self, dealtCard, param[1], param[2])
+            param = card1.getHeuristic(self, card2, players)
+            return Action(self, card1, param[1], param[2])
 
         # Countess Force Move
         if isinstance(card1, Countess):
@@ -58,8 +66,8 @@ class HardAI(Player):
                 return Action(self, card2, None, None)
 
         # Check Heuristics
-        card1Heuristic = card1.getHeuristic(self, card2)
-        card2Heuristic = card2.getHeuristic(self, card1)
+        card1Heuristic = card1.getHeuristic(self, card2, players)
+        card2Heuristic = card2.getHeuristic(self, card1, players)
 
         if(card1Heuristic[0] > card2Heuristic[0]):
             return Action(self, self.hand, card1Heuristic[1], card1Heuristic[2])
@@ -77,10 +85,6 @@ class HardAI(Player):
         # TODO: If action.doer is you, then don't decrement
         self.cardsInPlay[action.playedCard.value] -= 1
 
-        # initialize players on first turn
-        if action.doer not in self.playerRanges.keys():
-            self.playerRanges[action.doer] = [1,2,3,4,5,6,7,8]
-
         self.pruneRanges(action, graveState)
 
     def chooseRandom(self, players):
@@ -94,7 +98,7 @@ class HardAI(Player):
         playerRangeLength = 10
         minPlayer= None
         for player in self.playerRanges:
-            if len(player.value()) < playerRangeLength:
+            if len(self.playerRanges[player]) < playerRangeLength:
                 minPlayer= player
         return minPlayer
 
@@ -102,8 +106,8 @@ class HardAI(Player):
         cardObjects = [None, Guard, Priest, Baron, Handmaid, Prince, King, Countess, Princess]
         return cardObjects[index]
 
-    def getPriestKnowledge(self, player, card):
-        self.priestKnowledge= card
+    def priestKnowledge(self, player, card):
+        self.priestKnown= card
 
     def pruneRanges(self, action, graveState):
         # if discarded card is in player range - reset range
@@ -129,7 +133,8 @@ class HardAI(Player):
                 self.playerRanges[action.doer] = range(lower + 1, 9)
 
         elif isinstance(action.playedCard, Priest):
-            self.playerRanges[action.target] = self.priestKnowledge
+            self.playerRanges[action.target] = self.priestKnown
 
         elif isinstance(action.playedCard, Guard):
-            self.playerRanges[action.target].remove(action.guess.value)
+            if action.target != self:
+                self.playerRanges[action.target].remove(action.guess.value)
