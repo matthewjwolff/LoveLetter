@@ -37,7 +37,9 @@ class Baron(Card):
     def getHeuristic(self, bot, otherCard, players):
         for player in bot.playerRanges:
             rangeEstimate = bot.playerRanges[player]
-            if self.value > rangeEstimate[len(rangeEstimate)-1]:
+            if len(bot.playerRanges[player]) == 0:
+                return [otherCard.value, player, None]
+            elif self.value > rangeEstimate[len(rangeEstimate)-1]:
                 # return default
                 return [otherCard.value, player, None]
         if bot.isAggressive and otherCard.value == 4:

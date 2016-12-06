@@ -33,5 +33,9 @@ class Guard(Card):
 
     def getHeuristic(self, bot, otherCard, players):
         target = bot.getMinRangePlayer()
-        guess = choice(bot.playerRanges[target])
+        # TODO: if guess == Guard, retry
+        if len(bot.playerRanges[target])==0:
+            guess = 3
+        else:
+            guess = choice(bot.playerRanges[target])
         return [otherCard.value, target, guess]

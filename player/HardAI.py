@@ -81,6 +81,7 @@ class HardAI(Player):
         else:
             return Action(self, card1, card1Heuristic[1], classes[card1Heuristic[2]-1] if card1Heuristic[2] != None else None)
 
+
         # Action(doer, playedCard, target, guess)
         
     def __str__(self):
