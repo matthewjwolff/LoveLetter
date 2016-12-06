@@ -18,7 +18,7 @@ class King(Card):
         self.person = "King"
         self.value = 6
 
-    def perform(self, action, players, grave, deck):
+    def perform(self, action, players, engine, deck):
         # select player
         # swap hands
         doerHand = action.doer.hand

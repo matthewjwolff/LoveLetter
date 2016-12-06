@@ -19,12 +19,12 @@ class Prince(Card):
         self.person = "Prince"
         self.value = 5
 
-    def perform(self, action, players, grave, deck):
+    def perform(self, action, players, engine, deck):
         # choose player to discard hand
         # discard player's hand
         # force a redraw
         # discard card
-        grave.append(Action(None, action.target.hand, None, None))
+        engine.discard(action.target, action.target.hand)
         action.target.hand = deck.getCard()
 
     def getHeuristic(self, bot, otherCard):

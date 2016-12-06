@@ -31,9 +31,9 @@ class Card(object):
     # Note to kristen: if you need more parameters, add them in and I'll 
     # refactor the engine to work with it
 
-    def perform(self, action, players, grave, deck):
-        raise NotImplementedError
-
     def getHeuristic(self, bot, otherCard):
         # Default Heuristic
         return [otherCard.value, None, None]
+
+    def perform(self, action, players, engine, deck):
+        raise NotImplementedError

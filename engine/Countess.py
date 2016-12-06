@@ -19,7 +19,7 @@ class Countess(Card):
         self.person = "Countess"
         self.value = 7
 
-    def perform(self, action, players, grave, deck):
+    def perform(self, action, players, engine, deck):
         # if king or prince in hand when drawn -> move self to gy
         # if not -> hold onto card???
         pass

@@ -20,13 +20,14 @@ class Guard(Card):
         self.person = "Guard"
         self.value = 1
 
-    def perform(self, action, players, grave, deck):
+    def perform(self, action, players, engine, deck):
         # guess a target's card
         # if correct, remove the target from game
         # if wrong, discard guard
         if action.guess == type(action.target.hand):
             players.remove(action.target)
-            grave.append(Action(None, action.target.hand, None, None)) # moves card into grave
+            # It's ok to directly discard here. The player has already lost.
+            engine.grave.append(Action(action.target, action.target.hand, None, None)) # moves card into engine
 
     def getHeuristic(self, bot, otherCard):
         target = bot.getMinRange()

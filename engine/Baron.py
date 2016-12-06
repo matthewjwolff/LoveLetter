@@ -17,17 +17,19 @@ class Baron(Card):
         self.person = "Baron"
         self.value = 3
     
-    def perform(self, action, players, grave, deck):
+    def perform(self, action, players, engine, deck):
         # select player with perceived lower card (>2)
         # compare card values
         # if their hand has a higher value, remove self and self.hand
         # if self hand has a higher value, remove target and target.hand
         # if equal, discard baron, nothing happens
+        
+        # It's ok to directly discard here. The player has already lost.
         if action.target.hand.value > action.doer.hand.value:
-            grave.append(Action(action.doer, action.doer.hand, None, None))
+            engine.grave.append(Action(action.doer, action.doer.hand, None, None))
             players.remove(action.doer)
         elif action.target.hand.value < action.doer.hand.value:
-            grave.append(Action(action.target, action.target.hand, None, None))
+            engine.grave.append(Action(action.target, action.target.hand, None, None))
             players.remove(action.target)
 
     def getHeuristic(self, bot, otherCard):

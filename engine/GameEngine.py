@@ -7,6 +7,8 @@ The game loop runner
 '''
 
 from .Deck import Deck
+from engine.Princess import Princess
+from engine.Action import Action
 
 class GameEngine(object):
     '''
@@ -53,12 +55,13 @@ class GameEngine(object):
                     # then replace the card in his hand with the card from
                     # the deck
                     player.hand = card
-                action.playedCard.perform(action, self.players, self.grave, self.deck)
-                self.grave += [action]
+                action.playedCard.perform(action, self.players, self, self.deck)
                 # Tell other players that a play occurred
                 for oplayer in self.origplayers:
+                    # TODO: give all players notification
                     if oplayer != player:
                         oplayer.notifyOfAction(action, self.grave)
+                self.grave += [action]
                 # End the game if nobody remains or the deck is empty
                 if len(self.players) == 1 or self.deck.size()==0:
                     # Yes I could make this into a proper while loop
@@ -69,4 +72,12 @@ class GameEngine(object):
             if player.hand.value > winner.hand.value:
                 winner = player
         return winner
-        
+    
+    def discard(self, player, card):
+        '''
+        Safely force a player to discard a card, and apply any effects if necessary.
+        ex: the prince forces a princess discard, that player should lose
+        '''
+        if type(card)==Princess:
+            self.players.remove(player)
+        self.grave.append(Action(player, card, None, None))
