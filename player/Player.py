@@ -22,7 +22,7 @@ class Player(object):
     that is acting on his behalf.
     '''
 
-    def getAction(self, dealtcard, deckSize, gravestate, players):
+    def getAction(self, dealtCard, deckSize, graveState, players):
         '''
         Callback from engine to get a player's choice
         '''

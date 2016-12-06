@@ -22,11 +22,12 @@ class RandomAI(Player):
         self.number = RandomAI.numBots
         RandomAI.numBots+=1
     
-    def getAction(self, dealtcard, deckSize, gravestate, players):
+    def getAction(self, dealtCard, deckSize, graveState, players):
         # ok it's not totally random, but let's not have the bot be a total fool
         # and just play the handmaid on someone else
         choice = random.choice((self.hand, dealtcard))
         target = self
+
         if not isinstance(choice, Handmaid):
             while target is self:
                 target = random.choice(players)
