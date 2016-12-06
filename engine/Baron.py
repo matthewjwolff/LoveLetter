@@ -39,9 +39,9 @@ class Baron(Card):
                 # return default
                 return [otherCard.value, player, None]
         if bot.isAggressive and otherCard.value == 4:
-            return [0, bot.chooseRandom(), None]
+            return [0, bot.chooseRandom(players), None]
         elif not bot.isAggressive and otherCard.value == 5:
-            return [0, bot.chooseRandom(), None]
+            return [0, bot.chooseRandom(players), None]
         else:
             return [otherCard.value, bot.chooseRandom(players), None]
 

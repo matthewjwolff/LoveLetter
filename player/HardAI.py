@@ -49,13 +49,16 @@ class HardAI(Player):
         card1 = self.hand
         card2 = dealtCard
 
+        # TODO: refactor this
+        classes = (Guard, Priest, Baron, Handmaid, Prince, King, Countess, Princess)
+
         # Princess Force Move
         if isinstance(card1, Princess):
             param = card2.getHeuristic(self, card1, players)
-            return Action(self, card2, param[1], param[2])
+            return Action(self, card2, param[1], classes[param[2]-1] if param[2] != None else None)
         elif isinstance(card2, Princess):
             param = card1.getHeuristic(self, card2, players)
-            return Action(self, card1, param[1], param[2])
+            return Action(self, card1, param[1], classes[param[2]-1] if param[2] != None else None)
 
         # Countess Force Move
         if isinstance(card1, Countess):
@@ -70,9 +73,9 @@ class HardAI(Player):
         card2Heuristic = card2.getHeuristic(self, card1, players)
 
         if(card1Heuristic[0] > card2Heuristic[0]):
-            return Action(self, card2, card2Heuristic[1], card2Heuristic[2])
+            return Action(self, card2, card2Heuristic[1], classes[card2Heuristic[2]-1] if card2Heuristic[2] != None else None)
         else:
-            return Action(self, card1, card1Heuristic[1], card1Heuristic[2])
+            return Action(self, card1, card1Heuristic[1], classes[card1Heuristic[2]-1] if card1Heuristic[2] != None else None)
 
         # Action(doer, playedCard, target, guess)
         
@@ -139,5 +142,6 @@ class HardAI(Player):
 #             self.playerRanges[action.target] = self.priestKnown
 
         elif isinstance(action.playedCard, Guard):
-            if action.target != self:
+            # Just in case the bot is wrong
+            if action.target != self and action.guess.value in self.playerRanges[action.target]:
                 self.playerRanges[action.target].remove(action.guess.value)
