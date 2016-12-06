@@ -16,11 +16,12 @@ class Handmaid(Card):
         '''
         Constructor
         '''
-        person = "Handmaid"
+        person = "Handmaiden"
         value = 4
 
      def perform(self, action, players, grave, deck):
      	# remove player from the round selection?
      	# how to do this on my end?
      	# discard card
+        action.doer.handmaidenFlag = True
         
