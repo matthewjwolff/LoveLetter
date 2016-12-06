@@ -38,6 +38,7 @@ class GameEngine(object):
         self.running = True
         while self.running == True :
             for player in self.players :
+                player.handmaidenFlag = False
                 card = self.deck.getCard()
                 # I changed my mind, no deep copying
 
