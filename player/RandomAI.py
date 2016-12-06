@@ -25,7 +25,7 @@ class RandomAI(Player):
     def getAction(self, dealtCard, deckSize, graveState, players):
         # ok it's not totally random, but let's not have the bot be a total fool
         # and just play the handmaid on someone else
-        choice = random.choice((self.hand, dealtcard))
+        choice = random.choice((self.hand, dealtCard))
         target = self
 
         if not isinstance(choice, Handmaid):
