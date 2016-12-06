@@ -23,10 +23,10 @@ class Baron(Card):
         # if self hand has a higher value, remove target and target.hand
         # if equal, discard baron, nothing happens
         if action.target.hand.value > action.doer.hand.value:
-            grave.append(Action(None, action.doer.hand, None, None))
+            grave.append(Action(action.doer, action.doer.hand, None, None))
             players.remove(action.doer)
         elif action.target.hand.value < action.doer.hand.value:
-            grave.append(Action(None, action.target.hand, None, None))
+            grave.append(Action(action.target, action.target.hand, None, None))
             players.remove(action.target)
 
         
