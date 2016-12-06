@@ -25,4 +25,4 @@ class Guard(Card):
         # if wrong, discard guard
         if action.guess == type(action.target.hand):
             players.remove(action.target)
-            grave.append(Action(None, action.target.hand, None, None)) # moves card into grave        
+            grave.append(Action(None, action.target.hand, None, None)) # moves card into grave

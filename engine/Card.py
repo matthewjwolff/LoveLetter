@@ -19,9 +19,9 @@ class Card(object):
     this class. By doing this, browsing the graveyard will also browse known
     information
     '''
-    person = '' # type of card
-    value = 0 # card value/ranking 
-    count = 0 # number of cards of this type in game??? need???
+    person = ''  # type of card
+    value = 0  # card value/ranking
+    count = 0  # number of cards of this type in game??? need???
 
     '''
     note to matt: how do you want to keep track of count
@@ -32,6 +32,8 @@ class Card(object):
     # refactor the engine to work with it
 
     def perform(self, action, players, grave, deck):
-        self.type = person # return parameters on check
-        self.value = value
-        self.count = count
+        raise NotImplementedError
+
+    def getHeuristic(self, bot, otherCard):
+        # Default Heuristic
+        return otherCard.value
