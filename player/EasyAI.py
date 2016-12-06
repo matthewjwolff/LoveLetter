@@ -51,7 +51,10 @@ class EasyAI(Player):
 
             if isinstance(chosenCard, Guard):
                 guess = self.chooseRandomCard()
-
+                
+        if type(chosenCard) == Handmaid:
+            player = self
+            
         return Action(self, chosenCard, player, guess)
 
     def priestKnowledge(self, player, card):

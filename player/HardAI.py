@@ -14,7 +14,7 @@ from engine.Priest import Priest
 from engine.Prince import Prince
 from engine.Princess import Princess
 
-from . import Player
+from .Player import Player
 from random import choice
 from engine.Action import Action
 
@@ -26,8 +26,12 @@ class HardAI(Player):
     and Defensive, that help it make more informed decisions.
     '''
 
+    numBots = 0
+
     def __init__(self, playstyle, isAggressive):
         # index == value of card (1-indexed)
+        self.number = HardAI.numBots
+        HardAI.numBots += 1
         self.cardsInPlay = [0, 5, 2, 2, 2, 2, 1, 1, 1]
         self.playerRanges = {}
         self.isAggressive = isAggressive
@@ -63,18 +67,15 @@ class HardAI(Player):
             return Action(self, dealtCard, card2Heuristic[1], card2Heuristic[2])
 
         # Action(doer, playedCard, target, guess)
-
-
-
-
-
-
+        
+    def __str__(self):
+        return "HardAI"+str(self.number)
 
     def notifyOfAction(self, action, graveState):
         # Decrement amount of cards in play
         # TODO: Account for cards in hand
         # TODO: If action.doer is you, then don't decrement
-        self.cardsInPlay[action.playedCard] -= 1
+        self.cardsInPlay[action.playedCard.value] -= 1
 
         # initialize players on first turn
         if action.doer not in self.playerRanges.keys():
@@ -106,7 +107,7 @@ class HardAI(Player):
 
     def pruneRanges(self, action, graveState):
         # if discarded card is in player range - reset range
-        if action.playedCard.value() in self.playerRanges[action.doer]:
+        if action.playedCard.value in self.playerRanges[action.doer]:
             self.playerRanges[action.doer] = [1, 2, 3, 4, 5, 6, 7, 8]
 
         # updates player range based on cardsInPlay
@@ -121,7 +122,7 @@ class HardAI(Player):
         elif isinstance(action.playedCard, Baron):
             # Action of discarding after comparing cards
             loserAction = graveState[len(graveState) - 2]
-            lower = loserAction.playedCard.value()
+            lower = loserAction.playedCard.value
             if action.doer == loserAction.doer:
                 self.playerRanges[action.target] = range(lower + 1, 9)
             else:
@@ -131,4 +132,4 @@ class HardAI(Player):
             self.playerRanges[action.target] = self.priestKnowledge
 
         elif isinstance(action.playedCard, Guard):
-            self.playerRanges[action.target].remove(action.guess)
+            self.playerRanges[action.target].remove(action.guess.value)

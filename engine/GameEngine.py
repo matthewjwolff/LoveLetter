@@ -47,6 +47,8 @@ class GameEngine(object):
                 # Note, API change. Player is notified of the card dealt, 
                 # remaining cards in the deck, the graveyard, and the
                 # list of players
+                
+                # TODO: implement handmaid functionality
                 action = player.getAction(card, len(self.deck.shuffled), 
                                           self.grave, self.players)
                 # update the player's hand
