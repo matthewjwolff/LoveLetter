@@ -16,7 +16,7 @@ class StdoutInterface(object):
         print("Player "+str(player)+" has a "+card.__class__.__name__)
     
     def notifyCallback(self, action):
-        print("Player "+action.doer+" has played "+action.playedCard+" on "+action.target)
+        print("Player "+str(action.doer)+" has played "+action.playedCard.__class__.__name__+" on "+str(action.target))
         
     def actionCallback(self, dealtcard, deckSize, gravestate, players):
         print("You have been dealt a "+dealtcard.__class__.__name__)
@@ -56,7 +56,7 @@ class StdoutInterface(object):
                     print("Bad choice")
                 else:
                     chosen = True
-        return Action(self.proxy, self.proxy.hand if cardChoice == 0 else dealtcard, players[playerChoice], cardTypes[guessChoice])
+        return Action(self.proxy, self.proxy.hand if cardChoice == 1 else dealtcard, players[playerChoice], cardTypes[guessChoice])
                 
     def __init__(self, name):
         self.proxy = HumanProxy(self.actionCallback, self.notifyCallback, self.priestCallback, name)
