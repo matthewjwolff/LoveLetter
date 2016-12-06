@@ -16,7 +16,7 @@ class StdoutInterface(object):
     def priestCallback(self, player, card):
         print("Player "+str(player)+" has a "+card.__class__.__name__)
     
-    def notifyCallback(self, action):
+    def notifyCallback(self, action, graveState):
         print("Player "+str(action.doer)+" has played "+action.playedCard.__class__.__name__+" on "+str(action.target))
         
     def actionCallback(self, dealtcard, deckSize, gravestate, players):

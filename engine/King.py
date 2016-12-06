@@ -26,4 +26,6 @@ class King(Card):
         action.target.hand = doerHand
         action.doer.hand = targetHand
 
-        
+    def getHeuristic(self, bot, otherCard):
+        return [otherCard.value, bot.chooseRandom(), None]
+        # TODO: Implement with Time interval and range checker

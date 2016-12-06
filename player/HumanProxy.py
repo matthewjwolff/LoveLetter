@@ -24,11 +24,11 @@ class HumanProxy(Player):
         self.priestCallback = priestCallback
         self.name = name
         
-    def getAction(self, dealtcard, deckSize, gravestate, players):
-        return self.actionCallback(dealtcard, deckSize, gravestate, players)
-        
-    def notifyOfAction(self, action):
-        self.notifyCallback(action)
+    def getAction(self, dealtCard, deckSize, graveState, players):
+        return self.actionCallback(dealtCard, deckSize, graveState, players)
+    
+    def notifyOfAction(self, action, graveState):
+        self.notifyCallback(action, graveState)
     
     def priestKnowledge(self, player, card):
         self.priestCallback(player, card)

@@ -22,7 +22,7 @@ class Player(object):
     that is acting on his behalf.
     '''
 
-    def getAction(self, dealtcard, deckSize, gravestate, players):
+    def getAction(self, dealtCard, deckSize, graveState, players):
         '''
         Callback from engine to get a player's choice
         '''
@@ -36,7 +36,7 @@ class Player(object):
         '''
         self.hand = card
         
-    def notifyOfAction(self, action):
+    def notifyOfAction(self, action, graveState):
         '''
         On another player's move, this method is called for all other players 
         to serve as notification that a move occurred.

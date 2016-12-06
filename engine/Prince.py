@@ -26,4 +26,6 @@ class Prince(Card):
         # discard card
         grave.append(Action(None, action.target.hand, None, None))
         action.target.hand = deck.getCard()
-        
+
+    def getHeuristic(self, bot, otherCard):
+        return [otherCard.value, bot.chooseRandom(), None]

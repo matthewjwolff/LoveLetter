@@ -5,6 +5,7 @@ Created on Nov 26, 2016
 '''
 from engine.Card import Card
 from engine.Action import Action
+from random import choice
 
 class Guard(Card):
     '''
@@ -25,4 +26,9 @@ class Guard(Card):
         # if wrong, discard guard
         if action.guess == type(action.target.hand):
             players.remove(action.target)
-            grave.append(Action(None, action.target.hand, None, None)) # moves card into grave        
+            grave.append(Action(None, action.target.hand, None, None)) # moves card into grave
+
+    def getHeuristic(self, bot, otherCard):
+        target = bot.getMinRange()
+        guess = choice(bot.playerRanges[target])
+        return [otherCard.value, target, guess]

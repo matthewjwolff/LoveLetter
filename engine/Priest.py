@@ -22,4 +22,6 @@ class Priest(Card):
         # reveal another player's hand
         # add to knowledge base?
         action.doer.priestKnowledge(action.target, action.target.hand)
-        
+
+    def getHeuristic(self, bot, otherCard):
+        return [otherCard.value, bot.chooseRandom(), None]
