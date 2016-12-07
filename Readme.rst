@@ -5,6 +5,17 @@ Love Letter
 An implementation of the card game *Love Letter* for CSC 4444 Artificial
 Intelligence with Dr. Jianhua Chen.
 
+Repository Structure
+--------------------
+
++ ``doc/`` Contains documentation, including slides from presentation and 
+  project report
+
++ ``engine/`` Code for the game engine
++ ``player/`` Player implementations (AI and HumanProxy)
++ ``debug/`` Utilities to help debug the project
++ ``interface/`` Ways to control the HumanProxy
+
 Features
 --------
 
