@@ -8,7 +8,7 @@ from random import choice
 
 class Countess(Card):
     '''
-    Countess (1) Discard if caught with king or prince.
+    Countess (7) Discard if caught with king or prince.
     '''
 
 
@@ -20,8 +20,7 @@ class Countess(Card):
         self.value = 7
 
     def perform(self, action, players, engine, deck):
-        # if king or prince in hand when drawn -> move self to gy
-        # if not -> hold onto card???
+        # Does not actually do anything.
         pass
 
     def getHeuristic(self, bot, otherCard, players):

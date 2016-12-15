@@ -16,14 +16,13 @@ class Handmaid(Card):
         '''
         Constructor
         '''
-        self.person = "Handmaiden"
+        self.person = "Handmaid"
         self.value = 4
 
     def perform(self, action, players, engine, deck):
-        # remove player from the round selection?
-        # how to do this on my end?
-        # discard card
+        # TODO: refactor engine to work handmaid
         action.doer.handmaidenFlag = True
 
+    # TODO: verify handmaid heuristic
     def getHeuristic(self, bot, otherCard, players):
         return [otherCard.value, bot, None]

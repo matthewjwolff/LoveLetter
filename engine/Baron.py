@@ -26,14 +26,11 @@ class Baron(Card):
         
         # It's ok to directly discard here. The player has already lost.
         if action.target.hand.value > action.doer.hand.value:
-            engine.grave.append(Action(action.doer, action.doer.hand, None, None))
-            players.remove(action.doer)
-            engine.eliminatedThisRound = action.doer
+            engine.eliminate(action.doer)
         elif action.target.hand.value < action.doer.hand.value:
-            engine.grave.append(Action(action.target, action.target.hand, None, None))
-            players.remove(action.target)
-            engine.eliminatedThisRound = action.target
+            engine.eliminate(action.target)
 
+    # TODO: verify baron heuristic
     def getHeuristic(self, bot, otherCard, players):
         for player in bot.playerRanges:
             rangeEstimate = bot.playerRanges[player]

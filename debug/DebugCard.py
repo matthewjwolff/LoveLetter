@@ -23,6 +23,6 @@ class DebugCard(Card):
         eliminated = action.doer
         while eliminated is action.doer:
             eliminated = random.choice(players)
-        engine.discard(eliminated, eliminated.hand)
+        engine.abnormalDiscard(eliminated, eliminated.hand)
         if eliminated in players:
             players.remove(eliminated)

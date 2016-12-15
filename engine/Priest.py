@@ -20,8 +20,8 @@ class Priest(Card):
 
     def perform(self, action, players, engine, deck):
         # reveal another player's hand
-        # add to knowledge base?
         action.doer.priestKnowledge(action.target, action.target.hand)
 
+    # TODO: verify priest heuristic
     def getHeuristic(self, bot, otherCard, players):
         return [otherCard.value, bot.chooseRandom(players), None]

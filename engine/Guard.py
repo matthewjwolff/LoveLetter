@@ -25,12 +25,9 @@ class Guard(Card):
         # if correct, remove the target from game
         # if wrong, discard guard
         if action.guess == type(action.target.hand):
-            engine.eliminatedThisRound = action.target
-            players.remove(action.target)
-            # It's ok to directly discard here. The player has already lost.
-            engine.grave.append(Action(action.target, action.target.hand, None, None)) # moves card into engine
-            # tell players that a player got removed
+            engine.eliminate(action.target)
 
+    # TODO: verify guard heuristic
     def getHeuristic(self, bot, otherCard, players):
         target = bot.getMinRangePlayer()
         # TODO: if guess == Guard, retry

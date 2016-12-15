@@ -19,13 +19,12 @@ class King(Card):
         self.value = 6
 
     def perform(self, action, players, engine, deck):
-        # select player
         # swap hands
         doerHand = action.doer.hand
         targetHand = action.target.hand
         action.target.hand = doerHand
         action.doer.hand = targetHand
-
+    # TODO: verify King heuristic
     def getHeuristic(self, bot, otherCard, players):
         return [otherCard.value, bot.chooseRandom(players), None]
         # TODO: Implement with Time interval and range checker

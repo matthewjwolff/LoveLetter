@@ -19,7 +19,7 @@ class Princess(Card):
         self.value = 8
 
     def perform(self, action, players, engine, deck):
-        # remove player from the round if used
-        # otherwise hold onto card at all costs
+        # Directly remove player from game. Cannot use engine.eliminate
+        # because that method discards this card. 
         players.remove(action.doer)
         engine.eliminatedThisRound = action.doer

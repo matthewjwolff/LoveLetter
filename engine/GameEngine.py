@@ -32,7 +32,6 @@ class GameEngine(object):
     
     def runGame(self):
         # make a NEW list
-        print(self.deck.shuffled)
         self.players = list(self.origplayers)
         assert len(self.players) >= 2
         for player in self.players:
@@ -63,11 +62,11 @@ class GameEngine(object):
                 action.playedCard.perform(action, self.players, self, self.deck)
                 # Tell other players that a play occurred
                 for oplayer in self.origplayers:
-                    # TODO: give all players notification
                     if oplayer != player:
                         oplayer.notifyOfAction(action, self.grave)
+                # Then tell players if someone was eliminated
                 if self.eliminatedThisRound != None:
-                    self.notifyAllEliminate()
+                    self.notifyAllEliminate(self.eliminatedThisRound)
                 self.grave += [action]
                 # End the game if nobody remains or the deck is empty
                 if len(self.players) == 1 or self.deck.size()==0:
@@ -81,12 +80,18 @@ class GameEngine(object):
                 winner = player
         return winner
     
-    # TODO: make this not state based
-    def notifyAllEliminate(self):
-        for player in self.players:
-            player.notifyEliminate(self.eliminatedThisRound)
+    def eliminate(self, player):
+        assert(self.eliminatedThisRound == None)
+        self.grave.append(Action(player, player.hand, None, None))
+        self.players.remove(player)
+        self.eliminatedThisRound = player
     
-    def discard(self, player, card):
+    def notifyAllEliminate(self, eliminated):
+        for player in self.players:
+            player.notifyEliminate(eliminated)
+        self.eliminatedThisRound = None
+    
+    def abnormalDiscard(self, player, card):
         '''
         Safely force a player to discard a card, and apply any effects if necessary.
         ex: the prince forces a princess discard, that player should lose
@@ -95,8 +100,7 @@ class GameEngine(object):
         '''
         self.grave.append(Action(player, card, None, None))
         if type(card)==Princess:
-            self.players.remove(player)
-            self.eliminatedThisRound = player
+            self.eliminate(player)
         else:
             # the player must be given another card
             newCard = self.deck.getCard()
@@ -106,5 +110,6 @@ class GameEngine(object):
                 player.hand = newCard
             else:
                 # the deck is out of cards. Give the player the discarded card
+                # This only ever happens if the last card played is the prince
                 player.hand = self.discarded
                 self.discarded = None
