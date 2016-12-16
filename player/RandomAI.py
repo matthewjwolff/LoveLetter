@@ -8,6 +8,7 @@ from engine.Action import Action
 import random
 from engine.Baron import Baron
 from engine.Handmaid import Handmaid
+import engine.util
 
 class RandomAI(Player):
     '''
@@ -22,21 +23,26 @@ class RandomAI(Player):
         self.number = RandomAI.numBots
         RandomAI.numBots+=1
     
-    def getAction(self, dealtcard, deckSize, gravestate, players):
+    def getAction(self, dealtCard, deckSize, graveState, players):
         # ok it's not totally random, but let's not have the bot be a total fool
         # and just play the handmaid on someone else
-        choice = random.choice((self.hand, dealtcard))
+        choice = random.choice((self.hand, dealtCard))
         target = self
+
         if not isinstance(choice, Handmaid):
             while target is self:
                 target = random.choice(players)
             
-        return Action(self, choice, target, Baron)
+        classIndex = random.randrange(1,len(engine.util.cardTypes))
+        return Action(self, choice, target, engine.util.cardTypes[classIndex])
     
-    def notifyOfAction(self, action):
+    def notifyOfAction(self, action, graveState):
         pass
     
     def priestKnowledge(self, player, card):
+        pass
+    
+    def notifyEliminate(self, player):
         pass
     
     def __str__(self):

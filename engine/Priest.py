@@ -18,8 +18,12 @@ class Priest(Card):
         self.person = "Priest"
         self.value = 2
 
-    def perform(self, action, players, grave, deck):
+    def perform(self, action, players, engine, deck):
         # reveal another player's hand
-        # add to knowledge base?
         action.doer.priestKnowledge(action.target, action.target.hand)
-        
+
+    # Value of playing this card is the value of the card kept in hand.
+    # Same as king, handmaid, prince
+    # TODO: better priest heuristic
+    def getHeuristic(self, bot, otherCard, players):
+        return [otherCard.value, bot.chooseRandom(players), None]

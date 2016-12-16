@@ -18,7 +18,10 @@ class Princess(Card):
         self.person = "Princess"
         self.value = 8
 
-    def perform(self, action, players, grave, deck):
-        # remove player from the round if used
-        # otherwise hold onto card at all costs
+    def perform(self, action, players, engine, deck):
+        # Directly remove player from game. Cannot use engine.eliminate
+        # because that method discards this card. 
         players.remove(action.doer)
+        engine.eliminatedThisRound = action.doer
+        
+    # Intentionally no heuristic function?

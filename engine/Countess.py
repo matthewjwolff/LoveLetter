@@ -4,10 +4,11 @@ Created on Nov 26, 2016
 @author: mjw
 '''
 from engine.Card import Card
+from random import choice
 
 class Countess(Card):
     '''
-    Countess (1) Discard if caught with king or prince.
+    Countess (7) Discard if caught with king or prince.
     '''
 
 
@@ -18,8 +19,16 @@ class Countess(Card):
         self.person = "Countess"
         self.value = 7
 
-    def perform(self, action, players, grave, deck):
-        # if king or prince in hand when drawn -> move self to gy
-        # if not -> hold onto card???
+    def perform(self, action, players, engine, deck):
+        # Does not actually do anything.
         pass
-        
+
+    # 10% of the time, play this card to throw off players
+    # otherwise, keep it: it's a very highly valued card
+    def getHeuristic(self, bot, otherCard, players):
+        # TODO: implement early/mid/late game
+        # TODO: engine-wide change of countess / handmaid target to None
+        if choice(range(10)) == 1:
+            return [10, bot, None]
+        else:
+            return [0, bot, None]

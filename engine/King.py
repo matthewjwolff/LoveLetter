@@ -18,12 +18,15 @@ class King(Card):
         self.person = "King"
         self.value = 6
 
-    def perform(self, action, players, grave, deck):
-        # select player
+    def perform(self, action, players, engine, deck):
         # swap hands
         doerHand = action.doer.hand
         targetHand = action.target.hand
         action.target.hand = doerHand
         action.doer.hand = targetHand
-
-        
+    
+    # Value of playing this card is the value of the card kept in hand.
+    # Same as handmaid, priest, prince
+    def getHeuristic(self, bot, otherCard, players):
+        return [otherCard.value, bot.chooseRandom(players), None]
+        # TODO: Implement with Time interval and range checker

@@ -19,9 +19,10 @@ class DebugCard(Card):
         Constructor
         '''
     
-    def perform(self, action, players, grave, deck):
+    def perform(self, action, players, engine, deck):
         eliminated = action.doer
         while eliminated is action.doer:
             eliminated = random.choice(players)
-        grave.append(eliminated.hand)
-        players.remove(eliminated)
+        engine.abnormalDiscard(eliminated, eliminated.hand)
+        if eliminated in players:
+            players.remove(eliminated)
