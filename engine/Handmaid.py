@@ -23,6 +23,8 @@ class Handmaid(Card):
         # TODO: refactor engine to work handmaid
         action.doer.handmaidenFlag = True
 
-    # TODO: verify handmaid heuristic
+    # Value of playing this card is the value of the card kept in hand.
+    # Same as king, priest, prince
+    # TODO: better handmaid heuristic
     def getHeuristic(self, bot, otherCard, players):
         return [otherCard.value, bot, None]

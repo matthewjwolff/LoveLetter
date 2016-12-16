@@ -18,6 +18,8 @@ from .Player import Player
 from random import choice
 from engine.Action import Action
 
+import engine.util
+
 
 class HardAI(Player):
     '''
@@ -43,18 +45,20 @@ class HardAI(Player):
         
     def assignHand(self, card, players):
         Player.assignHand(self, card, players)
-                # initialize players on first turn
+        # initialize players on first turn
         for player in players:
             if player != self:
                 self.playerRanges[player] = [1,2,3,4,5,6,7,8]
 
-    # self.hand == card in hand, dealtCard == card drawn
+    # calculates a heuristic for both cards and plays the card with the 
+    # lower estimated value to improve it's own value
+    # Note: some cards's heuristics are really the other cards' values.
+    # This might invert the logic
     def getAction(self, dealtCard, deckSize, graveState, players):
         card1 = self.hand
         card2 = dealtCard
 
-        # TODO: refactor this
-        classes = (Guard, Priest, Baron, Handmaid, Prince, King, Countess, Princess)
+        classes = engine.util.cardTypes
 
         # Princess Force Move
         if isinstance(card1, Princess):
@@ -76,13 +80,11 @@ class HardAI(Player):
         card1Heuristic = card1.getHeuristic(self, card2, players)
         card2Heuristic = card2.getHeuristic(self, card1, players)
 
+        # Play (get rid of) the card with the lowest estimated value
         if(card1Heuristic[0] > card2Heuristic[0]):
             return Action(self, card2, card2Heuristic[1], classes[card2Heuristic[2]-1] if card2Heuristic[2] != None else None)
         else:
             return Action(self, card1, card1Heuristic[1], classes[card1Heuristic[2]-1] if card1Heuristic[2] != None else None)
-
-
-        # Action(doer, playedCard, target, guess)
         
     def __str__(self):
         return "HardAI"+str(self.number)
@@ -95,6 +97,7 @@ class HardAI(Player):
 
         self.pruneRanges(action, graveState)
 
+    # Choose a player that is not this bot
     def chooseRandom(self, players):
         player = self
         while player == self:
@@ -102,6 +105,7 @@ class HardAI(Player):
         return player
 
     # Used with Guard
+    # Find the player with the narrowest range of possible cards in hand
     def getMinRangePlayer(self):
         playerRangeLength = 10
         minPlayer= None
@@ -112,15 +116,13 @@ class HardAI(Player):
                     minPlayer= player
         return minPlayer
 
-    def getCardObject(self, index):
-        cardObjects = [None, Guard, Priest, Baron, Handmaid, Prince, King, Countess, Princess]
-        return cardObjects[index]
-
     def priestKnowledge(self, player, card):
         self.playerRanges[player] = [card.value]
 
     def pruneRanges(self, action, graveState):
         # if discarded card is in player range - reset range
+        # if the card played was one we were tracking, we now have to reset 
+        # our guess
         if action.playedCard.value in self.playerRanges[action.doer]:
             self.playerRanges[action.doer] = [1, 2, 3, 4, 5, 6, 7, 8]
 
@@ -134,6 +136,7 @@ class HardAI(Player):
         if isinstance(action.playedCard, Countess):
             self.playerRanges[action.doer] = [5, 6, 8]
 
+        # TODO: track what happens now that the engine notifies of elimination
         elif isinstance(action.playedCard, Baron):
             # Action of discarding after comparing cards
             # in the very small chance that it's the beginning of the game
@@ -144,11 +147,11 @@ class HardAI(Player):
                     self.playerRanges[action.target] = list(range(lower + 1, 9))
                 else:
                     self.playerRanges[action.doer] = list(range(lower + 1, 9))
-#         Was once used to gain knowledge from playing the priest
-#         elif isinstance(action.playedCard, Priest):
-#             self.playerRanges[action.target] = self.priestKnown
 
         elif isinstance(action.playedCard, Guard):
             # Just in case the bot is wrong
             if action.target != self and action.guess.value in self.playerRanges[action.target]:
+                # if the guess was something we thought that player had,
+                # and the player said he doesn't have it
+                # remove it from what we were tracking
                 self.playerRanges[action.target].remove(action.guess.value)

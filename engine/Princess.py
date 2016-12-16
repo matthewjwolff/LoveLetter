@@ -23,3 +23,5 @@ class Princess(Card):
         # because that method discards this card. 
         players.remove(action.doer)
         engine.eliminatedThisRound = action.doer
+        
+    # Intentionally no heuristic function?

@@ -13,12 +13,12 @@ class DebugEngine(GameEngine):
     '''
 
 
-    def __init__(self):
+    def __init__(self, deck):
         '''
         Constructor
         '''
         self.origplayers = []
-        self.deck = NonRandomDeck()
+        self.deck = deck
         self.running = False
         self.grave = []
         self.discarded = None

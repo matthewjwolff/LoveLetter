@@ -23,6 +23,8 @@ class Countess(Card):
         # Does not actually do anything.
         pass
 
+    # 10% of the time, play this card to throw off players
+    # otherwise, keep it: it's a very highly valued card
     def getHeuristic(self, bot, otherCard, players):
         # TODO: implement early/mid/late game
         # TODO: engine-wide change of countess / handmaid target to None

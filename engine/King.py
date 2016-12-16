@@ -24,7 +24,9 @@ class King(Card):
         targetHand = action.target.hand
         action.target.hand = doerHand
         action.doer.hand = targetHand
-    # TODO: verify King heuristic
+    
+    # Value of playing this card is the value of the card kept in hand.
+    # Same as handmaid, priest, prince
     def getHeuristic(self, bot, otherCard, players):
         return [otherCard.value, bot.chooseRandom(players), None]
         # TODO: Implement with Time interval and range checker
