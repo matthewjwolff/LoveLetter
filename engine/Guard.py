@@ -9,14 +9,9 @@ class Guard(Card):
     '''
     classdocs
     '''
-
-
-    def __init__(self):
-        '''
-        Constructor
-        '''
-        self.person = "Guard"
-        self.value = 1
+    
+    person = "Guard"
+    value = 1
 
     def perform(self, action, players, engine, deck):
         # guess a target's card

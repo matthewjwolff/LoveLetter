@@ -21,7 +21,7 @@ def main():
         #p1 = RandomAI()
         #p2 = RandomAI()
         p1 = StdoutInterface("Patrick Mancuso")
-        p2 = HardAI(None, True)
+        p2 = HardAI(True)
         #p3 = HardAI(None, True)
         #p4 = HardAI(None, False)
         game.addPlayer(p1.proxy)

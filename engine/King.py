@@ -9,14 +9,9 @@ class King(Card):
     '''
     classdocs
     '''
-
-
-    def __init__(self):
-        '''
-        Constructor
-        '''
-        self.person = "King"
-        self.value = 6
+    
+    person = "King"
+    value = 6
 
     def perform(self, action, players, engine, deck):
         # swap hands

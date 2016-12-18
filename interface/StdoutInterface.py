@@ -19,6 +19,8 @@ class StdoutInterface(object):
     
     def notifyCallback(self, action, graveState):
         print("Player "+str(action.doer)+" has played "+action.playedCard.__class__.__name__+" on "+str(action.target))
+        if action.playedCard==Guard:
+            print("They guessed "+action.guess.__class__.__name__)
         
     def actionCallback(self, dealtcard, deckSize, gravestate, players):
         print("You have been dealt a "+dealtcard.__class__.__name__)

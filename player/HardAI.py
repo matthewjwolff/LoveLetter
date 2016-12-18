@@ -29,7 +29,7 @@ class HardAI(LoveLetterAI):
 
     numBots = 0
 
-    def __init__(self, playstyle, isAggressive):
+    def __init__(self, isAggressive):
         # index == value of card (1-indexed)
         self.number = HardAI.numBots
         HardAI.numBots += 1
@@ -156,7 +156,7 @@ class HardAI(LoveLetterAI):
             if len(rangeEstimate) == 0:
                 return [otherCard.value, player, None]
             # If the highest card the player might have is less than a Baron
-            elif self.value > rangeEstimate[len(rangeEstimate)-1]:
+            elif card.value > rangeEstimate[len(rangeEstimate)-1]:
                 # return default
                 return [otherCard.value, player, None]
         if self.isAggressive and otherCard.value == 4:

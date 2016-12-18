@@ -9,14 +9,9 @@ class Priest(Card):
     '''
     classdocs
     '''
-
-
-    def __init__(self):
-        '''
-        Constructor
-        '''
-        self.person = "Priest"
-        self.value = 2
+    
+    person = "Priest"
+    value = 2
 
     def perform(self, action, players, engine, deck):
         # reveal another player's hand

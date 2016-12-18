@@ -11,13 +11,8 @@ class Prince(Card):
     classdocs
     '''
 
-
-    def __init__(self):
-        '''
-        Constructor
-        '''
-        self.person = "Prince"
-        self.value = 5
+    person = "Prince"
+    value = 5
 
     def perform(self, action, players, engine, deck):
         # discard player's hand

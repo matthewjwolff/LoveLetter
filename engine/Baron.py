@@ -9,12 +9,9 @@ class Baron(Card):
     '''
     Baron (2) Compare hands; lower hand is out.
     '''
-    def __init__(self):
-        '''
-        Constructor
-        '''
-        self.person = "Baron"
-        self.value = 3
+    
+    person = "Baron"
+    value = 3
     
     def perform(self, action, players, engine, deck):
         # select player with perceived lower card (>2)

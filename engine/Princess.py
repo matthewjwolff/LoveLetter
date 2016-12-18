@@ -10,13 +10,8 @@ class Princess(Card):
     classdocs
     '''
 
-
-    def __init__(self):
-        '''
-        Constructor
-        '''
-        self.person = "Princess"
-        self.value = 8
+    person = "Princess"
+    value = 8
 
     def perform(self, action, players, engine, deck):
         # Directly remove player from game. Cannot use engine.eliminate
