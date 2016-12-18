@@ -14,11 +14,11 @@ from engine.Priest import Priest
 from engine.Prince import Prince
 from engine.Princess import Princess
 
-from .Player import Player
 from random import choice
 from engine.Action import Action
+from player.LoveLetterAI import LoveLetterAI
 
-class EasyAI(Player):
+class EasyAI(LoveLetterAI):
     '''
     An AI that acts as a simple-reflex agent. It can only react based on the 
     two cards it has and what has been played in the graveyard. It does not 

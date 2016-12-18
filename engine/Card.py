@@ -22,11 +22,5 @@ class Card(object):
     # person = Name of card (though in most cases the class name is used)
     # value = Card value/ranking
 
-    # Get the estimated value of playing this card.
-    # Note that the return of this function is a list of:
-    # [ value, target player, guess for guard ]
-    def getHeuristic(self, bot, otherCard, players):
-        raise NotImplementedError
-
     def perform(self, action, players, engine, deck):
         raise NotImplementedError

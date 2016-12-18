@@ -3,14 +3,13 @@ Created on Nov 27, 2016
 
 @author: mjw
 '''
-from player.Player import Player
 from engine.Action import Action
 import random
-from engine.Baron import Baron
 from engine.Handmaid import Handmaid
 import engine.util
+from player.LoveLetterAI import LoveLetterAI
 
-class RandomAI(Player):
+class RandomAI(LoveLetterAI):
     '''
     An AI for engine testing that makes a random choice for all actions.
     
