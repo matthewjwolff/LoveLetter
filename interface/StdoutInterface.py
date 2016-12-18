@@ -7,7 +7,6 @@ from player.HumanProxy import HumanProxy
 from engine.util import cardTypes
 from engine.Action import Action
 from engine.Guard import Guard
-from turtledemo.minimal_hanoi import play
 
 class StdoutInterface(object):
     '''
