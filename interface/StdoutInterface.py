@@ -65,10 +65,14 @@ class StdoutInterface(object):
     
     def eliminateCallback(self, player):
         print("Player "+str(player)+ " has been eliminated")
+        
+    def assignHandCallback(self, card, players):
+        print("The game has begun. "+str(players)+" are playing.")
+        print("Your initial card is "+card.__class__.__name__)
                 
     def __init__(self, name=None):
         if name==None:
             print("What is your name?")
             name = input("> ")
-        self.proxy = HumanProxy(self.actionCallback, self.notifyCallback, self.priestCallback, self.eliminateCallback, name)
+        self.proxy = HumanProxy(self.actionCallback, self.notifyCallback, self.priestCallback, self.eliminateCallback, self.assignHandCallback, name)
         

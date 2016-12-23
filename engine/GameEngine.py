@@ -39,6 +39,9 @@ class GameEngine(object):
         # discard one
         self.discarded = self.deck.getCard()
         self.running = True
+        # initialize handmaid flag
+        for player in self.players:
+            player.handmaidenFlag = False
         while self.running == True :
             for player in self.players :
                 self.eliminatedThisRound = None
@@ -50,9 +53,12 @@ class GameEngine(object):
                 # remaining cards in the deck, the graveyard, and the
                 # list of players
                 
-                # TODO: implement handmaid functionality
+                nonHandmaid = list(self.players)
+                for hplayer in nonHandmaid:
+                    if hplayer.handmaidenFlag==True:
+                        nonHandmaid.remove(hplayer)
                 action = player.getAction(card, len(self.deck.shuffled), 
-                                          self.grave, self.players)
+                                          self.grave, nonHandmaid)
                 # update the player's hand
                 if action.playedCard == player.hand:
                     # If the player chose to play the card he had kept,

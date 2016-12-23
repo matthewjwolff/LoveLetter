@@ -18,12 +18,17 @@ class HumanProxy(Player):
     '''
 
 
-    def __init__(self, actionCallback, notifyCallback, priestCallback, eliminateCallback, name):
+    def __init__(self, actionCallback, notifyCallback, priestCallback, eliminateCallback, assignHandCallback, name):
         self.actionCallback = actionCallback
         self.notifyCallback = notifyCallback
         self.priestCallback = priestCallback
         self.eliminateCallback = eliminateCallback
+        self.assignHandCallback = assignHandCallback
         self.name = name
+        
+    def assignHand(self, card, players):
+        Player.assignHand(self, card, players)
+        self.assignHandCallback(card, players)
         
     def getAction(self, dealtCard, deckSize, graveState, players):
         return self.actionCallback(dealtCard, deckSize, graveState, players)
