@@ -37,6 +37,12 @@ class EasyAI(LoveLetterAI):
     def getAction(self, dealtCard, deckSize, graveState, players):
         player = self
         guess = None
+        
+        # If we have to play the countess
+        if isinstance(self.hand, Countess) and (isinstance(dealtCard, King) or isinstance(dealtCard, Prince)) :
+            return Action(self, self.hand, self, None)
+        elif isinstance(dealtCard, Countess) and (isinstance(self.hand, King) or isinstance(self.hand, Prince)) :
+            return Action(self, dealtCard, self, None)
 
         if self.hand.value > dealtCard.value:
             chosenCard = dealtCard

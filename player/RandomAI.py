@@ -6,6 +6,9 @@ Created on Nov 27, 2016
 from engine.Action import Action
 import random
 from engine.Handmaid import Handmaid
+from engine.Countess import Countess
+from engine.King import King
+from engine.Prince import Prince
 import engine.util
 from player.LoveLetterAI import LoveLetterAI
 
@@ -27,6 +30,12 @@ class RandomAI(LoveLetterAI):
         # and just play the handmaid on someone else
         choice = random.choice((self.hand, dealtCard))
         target = self
+
+        # If we have to play the countess
+        if isinstance(self.hand, Countess) and (isinstance(dealtCard, King) or isinstance(dealtCard, Prince)) :
+            return Action(self, self.hand, self, None)
+        elif isinstance(dealtCard, Countess) and (isinstance(self.hand, King) or isinstance(self.hand, Prince)) :
+            return Action(self, dealtCard, self, None)
 
         if not isinstance(choice, Handmaid):
             while target is self:
