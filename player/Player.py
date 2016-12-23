@@ -28,8 +28,6 @@ class Player(object):
         '''
         raise NotImplementedError
     
-    # TODO: tell the player some initial state information when calling this
-    # i.e. how many players are playing
     def assignHand(self, card, players):
         '''
         The engine has given the player his starting hand
